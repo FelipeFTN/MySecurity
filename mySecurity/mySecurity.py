@@ -7,7 +7,11 @@ if __name__ == "__main__":
     t1 = Thread(target=shutdown.startTimer)
     t1.start()
 
-    # Add Interface Kivy
+    # Interface Kivy
+    import interface
+    mySecurity = interface.Application()
+    t2 = Thread(target=mySecurity.run)
+    t2.start()
 
     # Start Server
     import server
