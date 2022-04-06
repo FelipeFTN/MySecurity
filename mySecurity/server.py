@@ -12,6 +12,7 @@ def startServer():
     server.bind((REMOTE_HOST, REMOTE_PORT))
     server.listen()
 
+    # Connection Loop
     while True:
         client, client_addr = server.accept()
         client.send("[+] User Authenticated!".encode())
