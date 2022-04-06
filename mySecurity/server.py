@@ -13,10 +13,7 @@ def startServer():
     server.listen()
 
     while True:
-        try:
-            client, client_addr = server.accept()
-            client.send("[+] User Authenticated!")
-            client.close()
-            return True
-        except Exception as e:
-            return e
+        client, client_addr = server.accept()
+        client.send("[+] User Authenticated!".encode())
+        client.close()
+        return True
