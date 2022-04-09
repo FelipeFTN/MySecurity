@@ -1,3 +1,4 @@
+requests
 wheel
 docutils
 pygments
