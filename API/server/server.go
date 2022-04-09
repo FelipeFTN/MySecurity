@@ -3,9 +3,20 @@ package server
 import (
 	"net/http"
 
+	"github.com/FelipeFTN/mySecurity/server/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
+
+func Routes(e *echo.Echo) {
+
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "MySecurity!\n")
+	})
+
+	e.POST("/instance", handler.SaveInstance)
+
+}
 
 func Server() {
 
@@ -19,9 +30,7 @@ func Server() {
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PUT, echo.PATCH, echo.POST, echo.DELETE},
 	}))
 	// Root Route ==> handler
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "MySecurity!\n")
-	})
+	Routes(e)
 	// Run Server
 	e.Logger.Fatal(e.Start(":8000"))
 }
