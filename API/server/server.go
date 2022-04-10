@@ -14,7 +14,7 @@ func Routes(e *echo.Echo) {
 		return c.String(http.StatusOK, "MySecurity!\n")
 	})
 
-	e.POST("/instance", handler.SaveInstance)
+	e.POST("/instance", handler.Instance)
 
 }
 

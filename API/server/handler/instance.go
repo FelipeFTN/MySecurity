@@ -1,20 +1,21 @@
 package handler
 
 import (
-	"fmt"
+	"net/http"
 
+	"github.com/FelipeFTN/mySecurity/domain/data"
 	"github.com/FelipeFTN/mySecurity/server/viewmodel"
 	"github.com/labstack/echo"
 )
 
-func SaveInstance(c echo.Context) error {
+func Instance(c echo.Context) error {
 	var vm viewmodel.Instance
 	err := c.Bind(&vm)
 	if err != nil {
 		c.Logger().Errorf("JSON Bind Error: %s", err)
 	}
 
-	fmt.Print(vm.Name)
+	instances := data.InstanceData(vm.Name, vm.IP)
 
-	return nil
+	return c.JSON(http.StatusOK, instances)
 }
