@@ -1,12 +1,13 @@
 import subprocess
 import socket
+import json
 
 def startServer():
     # Initialize Server
-    server = socket.socket()
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     REMOTE_HOST = socket.gethostname()
-    REMOTE_PORT = 8000 
+    REMOTE_PORT = 9000 
     LOCAL_HOST = socket.gethostbyname(REMOTE_HOST)
 
     server.bind((REMOTE_HOST, REMOTE_PORT))
@@ -15,6 +16,16 @@ def startServer():
     # Client Connection
     while True:
         client, client_addr = server.accept()
+        print(client_addr)
+        message = {
+            "0": "Shutdown Now",
+            "1": "No Authorization",
+            "2": "Log Out",
+            "3": "Send Message"
+        }
+
+        message = json.dumps(message, indent=2).encode("utf-8")
+        client.send(message)
 
         request = client.recv(1024)
         request = request.decode()
