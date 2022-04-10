@@ -26,10 +26,3 @@ func Instance(vm viewmodel.Instance) ([]entity.Instance, error) {
 
 	return instances, nil
 }
-
-func ControlInstance(vm viewmodel.ControlInstance) (string, error) {
-
-	// Connect with APP Using Socket
-
-	return "", nil
-}

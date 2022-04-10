@@ -29,15 +29,3 @@ func GetInstances(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, instances)
 }
-
-func ControlInstance(c echo.Context) error {
-	var vm viewmodel.ControlInstance
-	err := c.Bind(&vm)
-	if err != nil {
-		return c.String(http.StatusBadRequest, "Invalid Request Body")
-	}
-
-	response, err := service.ControlInstance(vm)
-
-	return c.String(http.StatusOK, response)
-}
