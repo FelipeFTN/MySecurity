@@ -16,12 +16,10 @@ func Instance(c echo.Context) error {
 		c.Logger().Errorf("JSON Bind Error: %s", err)
 	}
 
-	err = service.Instance(vm)
+	instances, err := service.Instance(vm)
 	if err != nil {
 		return c.String(http.StatusBadRequest, "Invalid Request Body")
 	}
-
-	instances := data.InstanceData(vm.Name, vm.IP)
 
 	return c.JSON(http.StatusOK, instances)
 }
