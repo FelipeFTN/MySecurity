@@ -1,8 +1,6 @@
 package server
 
 import (
-	"net/http"
-
 	"github.com/FelipeFTN/mySecurity/server/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -10,12 +8,8 @@ import (
 
 func Routes(e *echo.Echo) {
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "MySecurity!\n")
-	})
-
+	e.GET("/instance", handler.GetInstances)
 	e.POST("/instance", handler.Instance)
-
 }
 
 func Server() {

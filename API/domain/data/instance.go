@@ -15,3 +15,8 @@ func InstanceData(Name string, IP string) []entity.Instance {
 
 	return instancesData
 }
+
+func GetInstanceData() []entity.Instance {
+
+	return instancesData
+}
