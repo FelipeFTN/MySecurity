@@ -7,11 +7,12 @@ if __name__ == "__main__":
     # t2 = Thread(target=mySecurity.run)
     # t2.start()
 
-    # Start Server
-    # import server
-    # server.startServer()
-
     # Request Back-end
     import request
     req = request.sendRequest()
-    print(req)
+    if req.status_code == 200:
+
+        # Start Server
+        import server
+        server.startServer()
+
