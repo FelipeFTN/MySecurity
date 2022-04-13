@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net"
 	"net/http"
 
@@ -11,8 +10,9 @@ import (
 )
 
 const (
-	appHost string = "127.0.0.1"
-	appPort string = "9000"
+	APP_HOST = "127.0.0.1"
+	APP_PORT = "9000"
+	APP_TYPE = "tcp"
 )
 
 func ControlInstance(c echo.Context) error {
@@ -26,19 +26,26 @@ func ControlInstance(c echo.Context) error {
 }
 
 func GetInstanceCommands(c echo.Context) error {
-	service := fmt.Sprintf("%s:%s", appHost, appPort)
+	service := fmt.Sprintf("%s:%s", APP_HOST, APP_PORT)
 
-	conn, err := net.Dial("tcp", service)
+	conn, err := net.Dial(APP_TYPE, service)
 	if err != nil {
-		return c.String(http.StatusInternalServerError, "Can't connect to TCP Address")
+		return c.String(http.StatusInternalServerError, "Can't Connect to TCP Address")
 	}
 
-	result, err := ioutil.ReadAll(conn)
+	// _, err = conn.Write([]byte("Enviar Mensagem"))
+	// if err != nil {
+	// 	return c.String(http.StatusInternalServerError, "Write to server failed")
+	// }
+
+	responseByte := make([]byte, 1024)
+
+	response, err := conn.Read(responseByte)
 	if err != nil {
-		return c.String(http.StatusInternalServerError, "Can't Read TCP Bytes")
+		return c.String(http.StatusInternalServerError, "Can't Read Server Response")
 	}
 
-	fmt.Print(result)
+	fmt.Printf("Receive %d bytes in response: %#v", response, responseByte[:response])
 
-	return c.String(http.StatusOK, "Nice!")
+	return c.String(http.StatusOK, string(responseByte[:response]))
 }
