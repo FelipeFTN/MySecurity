@@ -10,8 +10,8 @@ func Routes(e *echo.Echo) {
 
 	e.GET("/instance", handler.GetInstances)
 	e.POST("/instance", handler.Instance)
-	e.POST("/instance/control", handler.ControlInstance)
-	e.GET("/instance/control", handler.GetInstanceCommands)
+	e.POST("/instance/control", handler.CommandInstance)
+	e.GET("/instance/control", handler.ControlInstance)
 }
 
 func Server() {

@@ -3,5 +3,6 @@ package viewmodel
 type ControlInstance struct {
 	Name    string `json:"instance_name"`
 	IP      string `json:"instance_ip"`
-	Command uint8  `json:"instance_command"`
+	Secret  string `json:"instance_secret"`
+	Command string `json:"instance_command"`
 }

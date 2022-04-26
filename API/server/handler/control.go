@@ -1,21 +1,15 @@
 package handler
 
 import (
-	"fmt"
-	"net"
 	"net/http"
 
+	"github.com/FelipeFTN/mySecurity/domain/service"
+	"github.com/FelipeFTN/mySecurity/domain/utils"
 	"github.com/FelipeFTN/mySecurity/server/viewmodel"
 	"github.com/labstack/echo"
 )
 
-const (
-	APP_HOST = "127.0.0.1"
-	APP_PORT = "9000"
-	APP_TYPE = "tcp"
-)
-
-func ControlInstance(c echo.Context) error {
+func CommandInstance(c echo.Context) error {
 	var vm viewmodel.ControlInstance
 	err := c.Bind(&vm)
 	if err != nil {
@@ -25,27 +19,23 @@ func ControlInstance(c echo.Context) error {
 	return c.String(http.StatusOK, "")
 }
 
-func GetInstanceCommands(c echo.Context) error {
-	service := fmt.Sprintf("%s:%s", APP_HOST, APP_PORT)
+func ControlInstance(c echo.Context) error {
+	command := c.QueryParam("command")
+	instanceQuery := c.QueryParam("instance")
 
-	conn, err := net.Dial(APP_TYPE, service)
-	if err != nil {
-		return c.String(http.StatusInternalServerError, "Can't Connect to TCP Address")
+	instanceData, err := utils.SecretDecode(instanceQuery)
+
+	instanceParseData := viewmodel.ControlInstance{
+		Name:    instanceData.Name,
+		IP:      instanceData.IP,
+		Secret:  instanceData.Secret,
+		Command: command,
 	}
 
-	// _, err = conn.Write([]byte("Enviar Mensagem"))
-	// if err != nil {
-	// 	return c.String(http.StatusInternalServerError, "Write to server failed")
-	// }
-
-	responseByte := make([]byte, 1024)
-
-	response, err := conn.Read(responseByte)
+	instanceResponse, err := service.ControlInstance(instanceParseData)
 	if err != nil {
-		return c.String(http.StatusInternalServerError, "Can't Read Server Response")
+		return c.String(http.StatusInternalServerError, "Service Error")
 	}
 
-	fmt.Printf("Receive %d bytes in response: %#v", response, responseByte[:response])
-
-	return c.String(http.StatusOK, string(responseByte[:response]))
+	return c.String(http.StatusOK, instanceResponse)
 }
