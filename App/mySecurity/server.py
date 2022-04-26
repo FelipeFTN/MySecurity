@@ -1,7 +1,7 @@
 from flask import request
 from flask import Flask
 import subprocess
-import globals
+import middleware
 
 app = Flask(__name__)
 
@@ -12,11 +12,11 @@ def mySecurity():
 @app.route('/shutdown')
 def shutdown():
     secret = request.headers.get('instance_secret')
-    if secret:
-        if secret == globals.SECRET:
-            subprocess.call(['shutdown', '/s'], shell=True) 
-            return "Done!"
-        return "Error: Instance Secret May be Incorrect", 406
-    return "Error: No Instance Secret Found", 400
+    err = middleware.secretMiddleware(secret)
+    if err:
+        return err[0], err[1]
+
+    subprocess.call(['shutdown', '/s'], shell=True)
+    return "Done!"
 
 app.run()
