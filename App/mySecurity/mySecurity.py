@@ -1,4 +1,4 @@
-from threading import Thread
+# from threading import Thread
 
 if __name__ == "__main__":
     # Interface Kivy
@@ -14,5 +14,4 @@ if __name__ == "__main__":
 
         # Start Server
         import server
-        server.startServer()
 
