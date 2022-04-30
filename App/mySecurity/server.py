@@ -16,7 +16,15 @@ def shutdown():
     if err: return err[0], err[1]
 
     subprocess.call(['shutdown', '/s'], shell=True)
-    # subprocess.call(['msg', '*', 'Shutdown!'], shell=True)
     return "Done!"
+
+@app.route('/logout')
+def logout():
+    secret = request.headers.get('instance_secret')
+    err = middleware.secretMiddleware(secret)
+    if err: return err[0], err[1]
+
+    subprocess.call(['shutdown', '/l'], shell=True)
+    return "Done"
 
 app.run(host='0.0.0.0')
