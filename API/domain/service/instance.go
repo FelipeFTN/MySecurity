@@ -10,7 +10,7 @@ import (
 
 func Instance(vm viewmodel.Instance) ([]entity.Instance, error) {
 
-	if vm.Name == "" || vm.IP == "" || vm.Secret == "" {
+	if vm.Name == "" || vm.IP == "" || vm.Token == "" {
 		return []entity.Instance{}, errors.New("invalid request body")
 	}
 
@@ -22,7 +22,7 @@ func Instance(vm viewmodel.Instance) ([]entity.Instance, error) {
 		}
 	}
 
-	instances = data.InstanceData(vm.Name, vm.IP, vm.Secret)
+	instances = data.InstanceData(vm.Name, vm.IP, vm.Token)
 
 	return instances, nil
 }

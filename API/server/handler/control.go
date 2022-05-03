@@ -31,7 +31,7 @@ func ControlInstance(c echo.Context) error {
 	instanceParseData := viewmodel.ControlInstance{
 		Name:    instanceData.Name,
 		IP:      instanceData.IP,
-		Secret:  instanceData.Secret,
+		Token:   instanceData.Token,
 		Command: command,
 	}
 

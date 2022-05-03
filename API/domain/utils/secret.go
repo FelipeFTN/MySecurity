@@ -7,8 +7,8 @@ import (
 	"github.com/FelipeFTN/mySecurity/server/viewmodel"
 )
 
-func SecretDecode(secret string) (viewmodel.Instance, error) {
-	instanceInfo, err := base64.StdEncoding.DecodeString(secret)
+func SecretDecode(token string) (viewmodel.Instance, error) {
+	instanceInfo, err := base64.StdEncoding.DecodeString(token)
 	if err != nil {
 		return viewmodel.Instance{}, err
 	}
@@ -16,9 +16,9 @@ func SecretDecode(secret string) (viewmodel.Instance, error) {
 	instanceData := strings.Split(string(instanceInfo), " ")
 
 	instanceParseData := viewmodel.Instance{
-		Name:   instanceData[0],
-		IP:     instanceData[1],
-		Secret: secret,
+		Name:  instanceData[0],
+		IP:    instanceData[1],
+		Token: token,
 	}
 
 	return instanceParseData, nil

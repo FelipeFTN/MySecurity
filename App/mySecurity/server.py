@@ -11,8 +11,8 @@ def mySecurity():
 
 @app.route('/shutdown')
 def shutdown():
-    secret = request.headers.get('instance_secret')
-    err = middleware.secretMiddleware(secret)
+    token = request.headers.get('instance_token')
+    err = middleware.tokenMiddleware(token)
     if err: return err[0], err[1]
 
     subprocess.call(['shutdown', '/s'], shell=True)
@@ -20,8 +20,8 @@ def shutdown():
 
 @app.route('/logout')
 def logout():
-    secret = request.headers.get('instance_secret')
-    err = middleware.secretMiddleware(secret)
+    token = request.headers.get('instance_token')
+    err = middleware.tokenMiddleware(token)
     if err: return err[0], err[1]
 
     subprocess.call(['shutdown', '/l'], shell=True)
@@ -29,8 +29,8 @@ def logout():
 
 @app.route('/message', methods=['POST'])
 def message():
-    secret = request.headers.get('instance_secret')
-    err = middleware.secretMiddleware(secret)
+    token = request.headers.get('instance_token')
+    err = middleware.tokenMiddleware(token)
     if err: return err[0], err[1]
 
     content_type = request.headers.get('Content-Type')

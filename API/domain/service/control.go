@@ -20,17 +20,17 @@ func ControlInstance(vm viewmodel.ControlInstance) (string, error) {
 
 	switch vm.Command {
 	case "shutdown":
-		err := shutdown(client, host, vm.Secret)
+		err := shutdown(client, host, vm.Token)
 		if err != nil {
 			return "", err
 		}
 	case "logout":
-		err := logout(client, host, vm.Secret)
+		err := logout(client, host, vm.Token)
 		if err != nil {
 			return "", err
 		}
 	case "message":
-		err := message(client, host, vm.Secret, "Testing")
+		err := message(client, host, vm.Token, "Testing")
 		if err != nil {
 			return "", err
 		}
@@ -41,12 +41,12 @@ func ControlInstance(vm viewmodel.ControlInstance) (string, error) {
 	return "Done!", nil
 }
 
-func shutdown(client *http.Client, host string, secret string) error {
+func shutdown(client *http.Client, host string, token string) error {
 	req, err := http.NewRequest("GET", host+"/shutdown", nil)
 	if err != nil {
 		return err
 	}
-	req.Header.Add("instance_secret", secret)
+	req.Header.Add("instance_token", token)
 	res, err := client.Do(req)
 	if err != nil {
 		return err
@@ -56,12 +56,12 @@ func shutdown(client *http.Client, host string, secret string) error {
 	return nil
 }
 
-func logout(client *http.Client, host string, secret string) error {
+func logout(client *http.Client, host string, token string) error {
 	req, err := http.NewRequest("GET", host+"/logout", nil)
 	if err != nil {
 		return err
 	}
-	req.Header.Add("instance_secret", secret)
+	req.Header.Add("instance_token", token)
 	res, err := client.Do(req)
 	if err != nil {
 		return err
@@ -71,7 +71,7 @@ func logout(client *http.Client, host string, secret string) error {
 	return nil
 }
 
-func message(client *http.Client, host string, secret string, message string) error {
+func message(client *http.Client, host string, token string, message string) error {
 	jsonData := make(map[string]string)
 
 	jsonData["message"] = message
@@ -83,7 +83,7 @@ func message(client *http.Client, host string, secret string, message string) er
 		return err
 	}
 
-	req.Header.Add("instance_secret", secret)
+	req.Header.Add("instance_token", token)
 	req.Header.Set("Content-Type", "application/json")
 
 	res, err := client.Do(req)

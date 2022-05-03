@@ -4,12 +4,12 @@ import base64
 global LOCAL_HOST
 global LOCAL_HOST_ADDRESS
 global REMOTE_HOST_ADDRESS
-global SECRET
+global TOKEN
 
 LOCAL_HOST = socket.gethostname()
 LOCAL_HOST_ADDRESS = socket.gethostbyname(LOCAL_HOST)
 REMOTE_HOST_ADDRESS = 'http://127.0.0.1:8000/instance'
-# ToDo: Change Secret with JWT Token
-SECRET = LOCAL_HOST + " " + LOCAL_HOST_ADDRESS
-SECRET = base64.b64encode(SECRET.encode("utf-8"))
-SECRET = str(SECRET, "utf-8")
+# ToDo: Change Token with JWT Token
+TOKEN = LOCAL_HOST + " " + LOCAL_HOST_ADDRESS
+TOKEN = base64.b64encode(TOKEN.encode("utf-8"))
+TOKEN = str(TOKEN, "utf-8")
