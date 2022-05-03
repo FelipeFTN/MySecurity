@@ -21,9 +21,12 @@ func CommandInstance(c echo.Context) error {
 
 func ControlInstance(c echo.Context) error {
 	command := c.QueryParam("command")
-	instanceQuery := c.QueryParam("instance")
+	instanceHeader := c.Request().Header.Values("instance_token")
 
-	instanceData, err := utils.SecretDecode(instanceQuery)
+	instanceData, err := utils.SecretDecode(instanceHeader[0])
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "Error while Decoding Instance Token")
+	}
 
 	instanceParseData := viewmodel.ControlInstance{
 		Name:    instanceData.Name,
@@ -34,7 +37,7 @@ func ControlInstance(c echo.Context) error {
 
 	instanceResponse, err := service.ControlInstance(instanceParseData)
 	if err != nil {
-		return c.String(http.StatusInternalServerError, "Service Error")
+		return c.String(http.StatusInternalServerError, "Service error during APP Comunication")
 	}
 
 	return c.String(http.StatusOK, instanceResponse)
