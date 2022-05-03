@@ -30,7 +30,7 @@ func ControlInstance(vm viewmodel.ControlInstance) (string, error) {
 			return "", err
 		}
 	case "message":
-		err := message(client, host, vm.Token, "Testing")
+		err := message(client, host, vm.Token, vm.Message)
 		if err != nil {
 			return "", err
 		}

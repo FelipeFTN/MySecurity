@@ -1,8 +1,9 @@
 package viewmodel
 
+import "github.com/FelipeFTN/mySecurity/domain/entity"
+
 type ControlInstance struct {
-	Name    string `json:"instance_name"`
-	IP      string `json:"instance_ip"`
-	Token   string `json:"instance_token"`
-	Command string `json:"instance_command"`
+	entity.Instance
+	Command string `json:"command"`
+	Message string `json:"message"`
 }
