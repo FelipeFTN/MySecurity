@@ -25,6 +25,21 @@ def logout():
     if err: return err[0], err[1]
 
     subprocess.call(['shutdown', '/l'], shell=True)
-    return "Done"
+    return "Done!"
+
+@app.route('/message', methods=['POST'])
+def message():
+    secret = request.headers.get('instance_secret')
+    err = middleware.secretMiddleware(secret)
+    if err: return err[0], err[1]
+
+    content_type = request.headers.get('Content-Type')
+    if content_type != 'application/json':
+        return "Content-Type not Supported!", 400
+
+    json = request.json
+    message = json['message']
+    subprocess.call(['msg', '*', message])
+    return "Done!"
 
 app.run(host='0.0.0.0')
