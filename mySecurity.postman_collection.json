@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "c99f4302-0338-43a5-843e-b8cb6852bba7",
+		"name": "mySecurity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "Get All Instances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/instance",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"instance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shutdown",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "instance_token",
+								"value": "REVTS1RPUC02MklHNU43IDI2LjI1Mi4yNi4xMA==",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"command\": \"shutdown\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/instance/control",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"instance",
+								"control"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "instance_token",
+								"value": "REVTS1RPUC02MklHNU43IDI2LjI1Mi4yNi4xMA==",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"command\": \"message\",\r\n    \"message\": \"TESTING\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API}}/instance/control",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"instance",
+								"control"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "APP",
+			"item": [
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "instance_secret",
+								"value": "REVTS1RPUC02MklHNU43IDI2LjI1Mi4yNi4xMA==",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"Hello World\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP}}/message",
+							"host": [
+								"{{APP}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get APP",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "instance_token",
+								"value": "REVTS1RPUC02MklHNU43IDI2LjI1Mi4yNi4xMA==",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{APP}}/shutdown",
+							"host": [
+								"{{APP}}"
+							],
+							"path": [
+								"shutdown"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
