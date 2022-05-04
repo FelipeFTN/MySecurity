@@ -3,7 +3,6 @@ package service
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"time"
@@ -13,24 +12,24 @@ import (
 
 func ControlInstance(vm viewmodel.ControlInstance) (string, error) {
 
-	host := fmt.Sprintf("http://%s:5000", vm.IP)
+	host := fmt.Sprintf("http://%s:5000", vm.Instance.IP)
 	client := &http.Client{
 		Timeout: time.Second * 10,
 	}
 
 	switch vm.Command {
 	case "shutdown":
-		err := shutdown(client, host, vm.Token)
+		err := shutdown(client, host, vm.Instance.Token)
 		if err != nil {
 			return "", err
 		}
 	case "logout":
-		err := logout(client, host, vm.Token)
+		err := logout(client, host, vm.Instance.Token)
 		if err != nil {
 			return "", err
 		}
 	case "message":
-		err := message(client, host, vm.Token, vm.Message)
+		err := message(client, host, vm.Instance.Token, vm.Message)
 		if err != nil {
 			return "", err
 		}
@@ -88,7 +87,7 @@ func message(client *http.Client, host string, token string, message string) err
 
 	res, err := client.Do(req)
 	if err != nil || res.StatusCode != 200 {
-		return errors.New(res.Status)
+		return err
 	}
 	defer res.Body.Close()
 
