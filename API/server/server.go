@@ -8,6 +8,7 @@ import (
 
 func Routes(e *echo.Echo) {
 
+	e.GET("/auth", handler.Auth)
 	e.GET("/instance", handler.GetInstances)
 	e.POST("/instance", handler.Instance)
 	e.POST("/instance/control", handler.CommandInstance)

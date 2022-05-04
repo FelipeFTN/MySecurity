@@ -22,7 +22,15 @@ func Instance(vm viewmodel.Instance) ([]entity.Instance, error) {
 		}
 	}
 
-	instances = data.InstanceData(vm.Name, vm.IP, vm.Token)
+	instanceData := entity.Instance{
+		Name:  vm.Name,
+		IP:    vm.IP,
+		Token: vm.Token,
+		Auth:  vm.Auth,
+	}
+	instances = data.InsertInstance(instanceData)
+
+	go Authentication(instanceData.Token)
 
 	return instances, nil
 }

@@ -9,12 +9,20 @@ import (
 // Save all instances into this array
 var instancesData = []entity.Instance{}
 
-func InstanceData(Name string, IP string, Token string) []entity.Instance {
+func InsertInstance(instance entity.Instance) []entity.Instance {
 
 	currentInstance := entity.Instance{
-		Name:  Name,
-		IP:    IP,
-		Token: Token,
+		Name:  instance.Name,
+		IP:    instance.IP,
+		Token: instance.Token,
+		Auth:  instance.Auth,
+	}
+
+	for i, v := range instancesData {
+		if v.Token == instance.Token {
+			instancesData[i].Auth = instance.Auth
+			return instancesData
+		}
 	}
 
 	instancesData = append(instancesData, currentInstance)
