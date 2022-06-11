@@ -1,12 +1,35 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    background-color: #141E61;
+}
 .App {
     display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.mysecurity-header {
+    color: #EEEEEE;
+    margin: 2rem;
 }
 .online-instances {
-    text-align: center;
-    border: 1px solid black;
-    width: auto;
-    padding: 20px;
+    display: inline-flex;
+    justify-content: center; 
+    margin: 1rem;
 }
-.online-instances > p, h3 {
-    width: auto;
+.offline-instances {
+    display: inline-flex;
+    justify-content: center;
+    margin: 1rem;
+}
+.instance {
+    border: 1px solid black;
+    min-width: 300px;
+    min-height: 80px;
+    padding: 30px;
+}
+.instance button {
+    margin-top: 20px;
 }
