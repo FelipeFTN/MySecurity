@@ -1,11 +1,10 @@
-const axios: any = require('axios');
+import axios from "axios";
 
-export async function GetAllInstances(): Promise<void> {
-    await axios.get("127.0.0.1:8000/instance")
-    .then((response: any) => {
-        console.log(response)
-    })
-    .catch((err: any) => {
-        console.log(err)
-    })
+export const GetAllInstances = async (): Promise<any> => {
+    try {
+        const instances = await axios.get("http://localhost:8000/instance")
+        return instances
+    } catch(e) {
+        return e
+    }
 }
