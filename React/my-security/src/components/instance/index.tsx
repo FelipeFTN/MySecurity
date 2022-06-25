@@ -7,13 +7,10 @@ interface Props {
     ip: string;
 }
 
-
 export const Instance: React.FC<Props> = ({ name, ip }) => {
     const handleClick = async (e: any) => {
         console.log(await GetAllInstances());
-
     }
-
     return (
         <div className="instance">
             <h3>{name}</h3>
