@@ -20,7 +20,7 @@ function App() {
       <h1 className="mysecurity-header">MySecurity</h1>
       <div className="online-instances">
         {instances && instances.map((instance: any, index: number) => {
-          return (<Instance name={instance.Name} ip={instance.IP} key={index} />);
+          return (<Instance name={instance.Name} ip={instance.IP} token={instance.Token} key={index} />);
         })}
       </div>
       <br />

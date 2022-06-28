@@ -9,6 +9,7 @@ body {
     display: flex;
     text-align: center;
     flex-direction: column;
+    color: #EEEEEE;
 }
 .mysecurity-header {
     color: #EEEEEE;
@@ -25,7 +26,7 @@ body {
     margin: 1rem;
 }
 .instance {
-    border: 1px solid black;
+    border: 1px solid #EEEEEE;
     min-width: 300px;
     min-height: 80px;
     padding: 30px;
