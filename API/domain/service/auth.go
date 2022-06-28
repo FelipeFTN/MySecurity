@@ -45,11 +45,11 @@ func Authentication(instanceToken string) error {
 			break
 		}
 	}
-	shutdownInstance := viewmodel.ControlInstance{
+	shutdownInstance := viewmodel.CommandInstance{
 		Instance: instance,
 		Command:  "shutdown",
 		Message:  "",
 	}
-	ControlInstance(shutdownInstance)
+	CommandInstance(shutdownInstance)
 	return nil
 }

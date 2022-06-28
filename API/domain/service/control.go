@@ -10,7 +10,7 @@ import (
 	"github.com/FelipeFTN/mySecurity/server/viewmodel"
 )
 
-func ControlInstance(vm viewmodel.ControlInstance) (string, error) {
+func CommandInstance(vm viewmodel.CommandInstance) (string, error) {
 
 	host := fmt.Sprintf("http://%s:5000", vm.Instance.IP)
 	client := &http.Client{
