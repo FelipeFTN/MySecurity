@@ -4,9 +4,9 @@ import axios from "axios";
 export const GetAllInstances = async (): Promise<any> => {
     try {
         const instances = await axios.get("http://localhost:8000/instance")
-        if (instances.status !== 200) { throw instances.statusText }
+        if (instances.status !== 200) { throw instances.statusText; }
         return instances.data;
-    } catch(e) { console.log(e); return e; }
+    } catch(e) { console.log(e); }
 }
 
 export const ShutdownInstance = async (instanceToken: string): Promise<any> => {
@@ -16,7 +16,7 @@ export const ShutdownInstance = async (instanceToken: string): Promise<any> => {
         const shutdown = await axios.post("http://localhost:8000/instance/command", {"command":"shutdown"}, config);
         if (shutdown.status !== 200) { throw shutdown.statusText; }
         return shutdown.data;
-    } catch(e) { console.log(e); return e; }
+    } catch(e) { console.log(e); }
 }
 
 export const AuthenticateInstance = async (instanceToken: string): Promise<any> => {
@@ -27,5 +27,5 @@ export const AuthenticateInstance = async (instanceToken: string): Promise<any> 
             }
         })
         if (auth.status !== 200) { throw auth.statusText; }
-    } catch(e) { console.log(e); return e;}
+    } catch(e) { console.log(e); }
 }

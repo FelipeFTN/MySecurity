@@ -9,8 +9,8 @@ function App() {
   useEffect(() => {
     const GetInstances = async () => {
       const allInstances: any = await GetAllInstances();
-      setInstances(allInstances);
-      console.log(allInstances); // Debugging Console.log - Remove!
+      if (allInstances !== undefined) { setInstances(allInstances); }
+      console.log("Instances: ", allInstances); // Debugging Console.log - Remove!
     };
     GetInstances(); 
   }, []);
