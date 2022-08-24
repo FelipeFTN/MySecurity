@@ -1,6 +1,2 @@
 requests
-wheel
-docutils
-pygments
-kivy
 flask
