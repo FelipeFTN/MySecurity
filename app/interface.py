@@ -3,7 +3,6 @@ from tkinter import *
 WIDTH = 300
 HEIGHT = 250
 
-
 class mySecurity(Frame):
     def __init__(self):
         Frame.__init__(self)
