@@ -1,14 +1,18 @@
 @ECHO off
 
+echo Welcome to MySecurity Installer!
+echo:
+echo Disclaimer:
+echo Make sure you have the latest version of python, golang, pip and npm installed in your computer.
+pause
+
 :installPythonRequirements
-python.exe -m pip install -r ./app/python/requirements.txt
+echo Installing Python Requirements
+python.exe -m pip install -r ./app/requirements.txt
 
 :startGo
-cd ./api/
-go run ./main.go
-
-:startPython
-
-:startReact
+echo Installing Goland Server
+cd ./server/
+go build 
 
 pause
