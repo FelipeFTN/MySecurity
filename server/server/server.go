@@ -1,6 +1,8 @@
 package server
 
 import (
+	"io/ioutil"
+
 	"github.com/FelipeFTN/mySecurity/server/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -18,6 +20,7 @@ func Routes(e *echo.Echo) {
 func Server() {
 
 	e := echo.New()
+	e.Logger.SetOutput(ioutil.Discard)
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
