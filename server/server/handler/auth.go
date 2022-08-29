@@ -9,7 +9,7 @@ import (
 
 func Auth(c echo.Context) error {
 
-	instanceToken := c.Request().Header.Values("instance_token")
+	instanceToken := c.Request().Header.Values("Authorization")
 	if len(instanceToken) == 0 {
 		return c.String(http.StatusUnauthorized, "Error invalid token")
 	}

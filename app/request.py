@@ -15,3 +15,13 @@ def sendRequest():
         return "Error: No Connection was stablished!"
 
     return response
+
+def sendAuthorization():
+    try:
+        headers = {'Authorization': globals.TOKEN}
+        response = requests.get(
+            globals.REMOTE_HOST_ADDRESS,
+            headers=headers
+        )
+    except:
+        return "Error: Authentication failed"

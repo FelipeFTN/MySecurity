@@ -1,3 +1,5 @@
+from turtle import color
+from request import sendAuthorization 
 from tkinter import *
 
 WIDTH = 300
@@ -12,6 +14,16 @@ class mySecurity(Frame):
         POSITION_X = int(SCREEN_WIDTH/2 - WIDTH/2)
         POSITION_Y = int(SCREEN_HEIGHT/2 - HEIGHT/2)
 
+        def authenticate():
+            input = self.input0.get(1.0, "end-1c").strip()
+            if input != "FelipeFTN": self.label1.config(text = "Wrong Auth", bg='#fc3e2d'); return
+
+            error = sendAuthorization()
+            if error: self.label1.config(text = error, bg='#fc3e2d'); return
+
+            self.label1.config(text = "Authenticated!", bg='#94fc2d'); return
+
+
         self.pack()
 
         self.master.title("MySecurity")
@@ -25,11 +37,17 @@ class mySecurity(Frame):
         self.input0 = Text(self, width=15, height=1)
         self.input0.pack()
 
-        self.button0 = Button(self, text="Authenticate")
+        self.label1 = Label(self, text="", width=25)
+        self.label1.pack()
+
+        self.button0 = Button(self, text="Authenticate", command=authenticate)
         self.button0.pack()
+
 
 
 def main():
     mysecurity = mySecurity()
 
     mysecurity.mainloop()
+
+main()
