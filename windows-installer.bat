@@ -8,11 +8,11 @@ pause
 
 :installPythonRequirements
 echo Installing Python Requirements
-python.exe -m pip install -r ./app/requirements.txt
+start python.exe -m pip install -r ./app/requirements.txt
 
 :startGo
 echo Installing Goland Server
 cd ./server/
-go build 
+start go build 
 
 pause
