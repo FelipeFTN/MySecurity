@@ -1,6 +1,7 @@
 from turtle import color
 from request import sendAuthorization 
 from tkinter import *
+import globals
 
 WIDTH = 300
 HEIGHT = 250
@@ -16,13 +17,12 @@ class mySecurity(Frame):
 
         def authenticate():
             input = self.input0.get(1.0, "end-1c").strip()
-            if input != "FelipeFTN": self.label1.config(text = "Wrong Auth", bg='#fc3e2d'); return
+            if input != globals.AUTH_PASSWORD: self.label1.config(text = "Wrong Auth", bg='#fc3e2d'); return
 
             error = sendAuthorization()
             if error: self.label1.config(text = error, bg='#fc3e2d'); return
 
             self.label1.config(text = "Authenticated!", bg='#94fc2d'); return
-
 
         self.pack()
 
