@@ -2,6 +2,7 @@ from flask import request
 from flask import Flask
 import subprocess
 import middleware
+import globals
 
 app = Flask(__name__)
 
@@ -42,4 +43,4 @@ def message():
     subprocess.call(['msg', '*', message])
     return "Done!"
 
-app.run(host='0.0.0.0')
+app.run(host='0.0.0.0', port=globals.APP_PORT)
