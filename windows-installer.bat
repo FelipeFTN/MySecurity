@@ -23,6 +23,12 @@ cd ./server/
 start go build 
 echo:
 
+:buildReact
+echo Building React
+cd ../client/
+start npm run build
+echo:
+
 echo Congratulation! MySecurity Successfully installed.
 echo:
 pause

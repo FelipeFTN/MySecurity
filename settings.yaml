@@ -1,6 +1,7 @@
 user:
 - username: ""       # User Name
-- authentication: "" # User password
+  authentication: "" # User password
 mySecurity:
 - serverPort: "8000" # Golang Application Port
-- clientPort: "3000" # React Application Port
+  clientPort: "3000" # React Application Port
+  appPort: "5000"    # Python Application Port
