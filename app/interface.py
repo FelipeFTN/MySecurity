@@ -49,5 +49,3 @@ def main():
     mysecurity = mySecurity()
 
     mysecurity.mainloop()
-
-main()
