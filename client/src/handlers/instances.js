@@ -22,7 +22,7 @@ export const AuthenticateInstance = async (instanceToken) => {
     try {
         const auth = await axios.get("http://localhost:8000/auth", {
             headers: {
-                "Authentication": instanceToken
+                "Authorization": instanceToken
             }
         });
         if (auth.status !== 200) { throw auth.statusText; }

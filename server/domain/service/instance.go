@@ -8,17 +8,21 @@ import (
 	"github.com/FelipeFTN/mySecurity/server/viewmodel"
 )
 
-func Instance(vm viewmodel.Instance) ([]entity.Instance, error) {
+func Instance(vm viewmodel.Instance) (entity.Instance, error) {
 
 	if vm.Name == "" || vm.IP == "" || vm.Token == "" {
-		return []entity.Instance{}, errors.New("invalid request body")
+		return entity.Instance{}, errors.New("invalid request body")
 	}
 
 	instances := data.GetInstanceData()
 
 	for _, i := range instances {
 		if i.Name == vm.Name || i.IP == vm.IP {
-			return []entity.Instance{}, errors.New("machine already instanced")
+			instance, err := data.GetInstanceByToken(vm.Token)
+			if err != nil {
+				return entity.Instance{}, errors.New("internal error")
+			}
+			return instance, nil
 		}
 	}
 
@@ -28,9 +32,9 @@ func Instance(vm viewmodel.Instance) ([]entity.Instance, error) {
 		Token: vm.Token,
 		Auth:  vm.Auth,
 	}
-	instances = data.InsertInstance(instanceData)
+	newInstance := data.InsertInstance(instanceData)
 
 	go Authentication(instanceData.Token)
 
-	return instances, nil
+	return newInstance, nil
 }

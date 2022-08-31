@@ -9,7 +9,7 @@ import (
 // Save all instances into this array
 var instancesData = []entity.Instance{}
 
-func InsertInstance(instance entity.Instance) []entity.Instance {
+func InsertInstance(instance entity.Instance) entity.Instance {
 
 	currentInstance := entity.Instance{
 		Name:  instance.Name,
@@ -21,13 +21,13 @@ func InsertInstance(instance entity.Instance) []entity.Instance {
 	for i, v := range instancesData {
 		if v.Token == instance.Token {
 			instancesData[i].Auth = instance.Auth
-			return instancesData
+			return currentInstance
 		}
 	}
 
 	instancesData = append(instancesData, currentInstance)
 
-	return instancesData
+	return currentInstance
 }
 
 func GetInstanceData() []entity.Instance {

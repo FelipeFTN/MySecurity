@@ -23,7 +23,7 @@ function App() {
       <h1 className="mysecurity-header">MySecurity</h1>
       <div className="online-instances">
         { loading && <LoadingInstances/> }
-        { (!loading && instances) && <NoActiveInstances/> }
+        { (!loading && instances.length == 0) && <NoActiveInstances/> }
         {
           instances ? instances.map((instance, index) => {
             return (<Instance name={instance.Name} ip={instance.IP} token={instance.Token} key={index} />);

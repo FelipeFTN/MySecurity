@@ -20,7 +20,7 @@ class mySecurity(Frame):
             if input != globals.AUTH_PASSWORD: self.label1.config(text = "Wrong Auth", bg='#fc3e2d'); return
 
             error = sendAuthorization()
-            if error: self.label1.config(text = error, bg='#fc3e2d'); return
+            if error != 200 and error != 208: self.label1.config(text = error, bg='#fc3e2d'); return
 
             self.label1.config(text = "Authenticated!", bg='#94fc2d'); return
 
