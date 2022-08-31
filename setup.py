@@ -2,8 +2,8 @@
 
 import yaml 
 
-username = str(input("My name is: ")).strip()
-password = str(input("My authentication password will be: ")).strip()
+username = str(input("User Name: ")).strip()
+password = str(input("Auth Password: ")).strip()
 
 print("\n\n---- Here are some optional settings ------")
 print("      -== Just press enter to skip ==-      \n")
