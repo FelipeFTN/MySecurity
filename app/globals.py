@@ -12,8 +12,12 @@ global LOCAL_HOST
 global APP_PORT
 global TOKEN
 
-with open('../settings.yaml', 'r') as settings:
-    settingsYaml = yaml.safe_load(settings)
+try:
+    with open('./settings.yaml', 'r') as settings:
+        settingsYaml = yaml.safe_load(settings)
+except:
+    with open('../settings.yaml', 'r') as settings:
+        settingsYaml = yaml.safe_load(settings)
 
 LOCAL_HOST = socket.gethostname() 
 LOCAL_HOST_NAME = settingsYaml['user'][0]['username']
