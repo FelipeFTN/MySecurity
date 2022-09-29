@@ -1,6 +1,8 @@
 #!usr/bin/env python3
 
+import getpass
 import yaml 
+import os
 
 username = ""
 password = ""

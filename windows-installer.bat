@@ -37,12 +37,23 @@ goto :eof
 :buildReact
 echo Building React...
 cd ./client/
-npm run build
+start npm run build
+goto :eof
+
+:createInitializer
+echo Creating mySecurity Initializer
+set initializePath="%userprofile%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
+echo @ECHO off > %initializePath%\mySecurity.bat
+echo cd %cd%\app\ >> %initializePath%\mySecurity.bat
+echo python3 .\mySecurity.pyw >> %initializePath%\mySecurity.bat
+PAUSE
 EXIT /B %ERRORLEVEL%
+
 
 :main
 CALL :mySecurity
 CALL :installPythonRequirements
 CALL :mySecuritySetup
 CALL :buildGo
-GOTO :buildReact
+CALL :buildReact
+CALL :createInitializer
