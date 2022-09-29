@@ -1,6 +1,8 @@
 package server
 
 import (
+	"io/ioutil"
+
 	"github.com/FelipeFTN/mySecurity/server/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -18,9 +20,8 @@ func Routes(e *echo.Echo) {
 func Server() {
 
 	e := echo.New()
-	// e.Logger.SetOutput(ioutil.Discard)
+	e.Logger.SetOutput(ioutil.Discard)
 	// Middleware
-	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	// CORS
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
@@ -30,5 +31,5 @@ func Server() {
 	// Root Route ==> handler
 	Routes(e)
 	// Run Server
-	e.Logger.Fatal(e.Start(":8000"))
+	e.Start(":8000")
 }

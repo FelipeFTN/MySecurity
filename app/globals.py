@@ -31,3 +31,6 @@ SERVER_HOST_ADDRESS = f'http://127.0.0.1:{SERVER_PORT}'
 TOKEN = LOCAL_HOST_NAME + " " + LOCAL_HOST_ADDRESS
 TOKEN = base64.b64encode(TOKEN.encode("utf-8"))
 TOKEN = str(TOKEN, "utf-8")
+
+if LOCAL_HOST_NAME.strip() == "": LOCAL_HOST_NAME = LOCAL_HOST
+if AUTH_PASSWORD.strip() == "": AUTH_PASSWORD = "mysecurity"
