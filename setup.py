@@ -20,7 +20,7 @@ clientPort = str(input("Client port (3000) > ")).strip()
 appPort = str(input("App port (5000) > ")).strip()
 
 if serverPort == "": serverPort = "8000"
-if clientPort == "": clientPort = "3000"
+if clientPort == "": clientPort = "80"
 if appPort == "": appPort = "5000"
 
 settings = {
