@@ -42,13 +42,13 @@ goto :eof
 
 :createInitializer
 echo Creating mySecurity Initializer
+cd ..
 set initializePath="%userprofile%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
 echo @ECHO off > %initializePath%\mySecurity.bat
 echo cd %cd%\app\ >> %initializePath%\mySecurity.bat
 echo python3 .\mySecurity.pyw >> %initializePath%\mySecurity.bat
 PAUSE
 EXIT /B %ERRORLEVEL%
-
 
 :main
 CALL :mySecurity
