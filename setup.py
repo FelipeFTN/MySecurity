@@ -16,7 +16,7 @@ print("\n\n---- Here are some optional settings ------")
 print("      -== Just press enter to skip ==-      \n")
 
 serverPort = str(input("Server port (8000) > ")).strip()
-clientPort = str(input("Client port (3000) > ")).strip()
+clientPort = str(input("Client port (80) > ")).strip()
 appPort = str(input("App port (5000) > ")).strip()
 
 if serverPort == "": serverPort = "8000"
