@@ -11,7 +11,6 @@ int server(int *client) {
     address.sin_port = htons(8080);
     address.sin_family = AF_INET;
 
-    char buffer[1024];
     int addrlen = sizeof(address);
     int server_socket;
     int opt = 1;
@@ -46,9 +45,7 @@ int server(int *client) {
     return 0;
 }
 
-int sendMessage(int client, char* message) {
-
-    printf("client: %d\n", client);
+int sendToClient(int client, char* message) {
     if (send(client, message, strlen(message), 0) < 0) {
         printf("[x] Error while sending message.\n");
         return -1;
@@ -57,4 +54,20 @@ int sendMessage(int client, char* message) {
     printf("%s\n", message);
 
     return 0;
+}
+
+char *receiveFromClient(int client) {
+    char *buffer[1024] = { 0 };
+    char *bufferText;
+    int readValue;
+
+    readValue = read(client, buffer, 1024);
+    if (readValue < 0) {
+        printf("[%d] Error while receiving message.\n", readValue);
+    }
+    printf("%s\n", buffer);
+
+    bufferText = bufferText;
+
+    return bufferText;
 }

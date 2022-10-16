@@ -6,11 +6,14 @@
 
 int main() {
     int client;
-    char *message = "====== MySecurity ======\n0. Shutdown Computer";
+    char *option;
+    char *message = "====== MySecurity ======\n0. Shutdown Computer\n";
 
     server(&client);
 
-    sendMessage(client, message);
+    sendToClient(client, message);
+    
+    option = receiveFromClient(client);
 
     close(client);
 
