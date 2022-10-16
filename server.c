@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 
-int server() {
+int server(int *client) {
     struct sockaddr_in address;
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(8080);
@@ -14,7 +14,6 @@ int server() {
     char buffer[1024];
     int addrlen = sizeof(address);
     int server_socket;
-    int client;
     int opt = 1;
 
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -37,21 +36,25 @@ int server() {
         return -1;
     }
 
-    if ((client = accept(server_socket, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0) {
-        printf("[%d] Error while accepting the client.");
+    if ((*client = accept(server_socket, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0) {
+        printf("[%d] Error while accepting the client.", *client);
         return -1;
     }
 
-    printf("[%d] Client Connected!\n", client);
+    printf("[%d] Client Connected!\n", *client);
 
-    char *hello = "Hello World!";
-    if (send(client, hello, strlen(hello), 0) < 0) {
+    return 0;
+}
+
+int sendMessage(int client, char* message) {
+
+    printf("client: %d\n", client);
+    if (send(client, message, strlen(message), 0) < 0) {
         printf("[x] Error while sending message.\n");
+        return -1;
     }
 
-    printf("%s\n", hello);
-
-    close(client);
+    printf("%s\n", message);
 
     return 0;
 }
