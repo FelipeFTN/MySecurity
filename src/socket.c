@@ -7,13 +7,16 @@
 
 int server(int *client) {
     struct sockaddr_in address;
+    const int port = 8080;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(8080);
+    address.sin_port = htons(port);
     address.sin_family = AF_INET;
 
     int addrlen = sizeof(address);
     int server_socket;
     int opt = 1;
+
+    printf("MySecurity PORT: %d", port);
 
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("[%d] Error while creating the socket.");
@@ -50,8 +53,6 @@ int sendToClient(int client, char* message) {
         printf("[x] Error while sending message.\n");
         return -1;
     }
-
-    printf("%s\n", message);
 
     return 0;
 }
