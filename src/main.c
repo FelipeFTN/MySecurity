@@ -10,29 +10,28 @@ char *getMessage();
 int commandComputer();
 
 int main() {
+    char *option;
     int client;
+    int error;
 
-    server(&client);
+    error = server(&client);
+    if (error < 0) return -1;
 
-    sendToClient(client, getMessage());
-    
-    char *option = receiveFromClient(client);
+    while(option[0] != '1') {
+      error = sendToClient(client, getMessage());
+      if (error < 0) close(client);
+      
+      option = receiveFromClient(client);
 
-    int error = commandComputer(option);
-    if (error < 0) {
-      printf("[%d] Error while commanding computer\n", error);
-      sendToClient(client, "Error while commanding computer\n");
-      close(client);
-      return -1;
+      error = commandComputer(option);
+      if (error < 0) { printf("[x] Command Error!\n"); }
     }
-
-    close(client);
 
     return 0;
 }
 
 char *getMessage() {
-  char* message = "===== MySecurity =====\n0.Shutdown Computer\n1.Turn off MySecurity\n2.Exit";
+  char* message = "\n\n===== MySecurity =====\n\n0.Shutdown Computer\n1.Turn off MySecurity\n2.Exit\n";
 
   char *message_ptr = message;
 
@@ -40,7 +39,7 @@ char *getMessage() {
 }
 
 int commandComputer(char *option) {
-  printf("\noption: %s\n", option);
+  printf("\n[+] Client: %s\n", option);
   if (option[0] == '1') {
     return 0;
   }
