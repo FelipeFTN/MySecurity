@@ -16,7 +16,7 @@ int server(int *client) {
     int server_socket;
     int opt = 1;
 
-    printf("MySecurity PORT: %d", port);
+    printf("MySecurity PORT: %d\n", port);
 
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("[%d] Error while creating the socket.");
@@ -29,17 +29,17 @@ int server(int *client) {
     }
 
     if (bind(server_socket, (struct sockaddr*) &address, (socklen_t) addrlen) < 0) {
-        printf("[%d] Error while binding the socket.");
+        printf("[%d] Error while binding the socket.\n");
         return -1;
     }
 
     if (listen(server_socket, 3) < 0) {
-        printf("[%d] Error while listening the socket.");
+        printf("[%d] Error while listening the socket.\n");
         return -1;
     }
 
     if ((*client = accept(server_socket, (struct sockaddr*) &address, (socklen_t*) &addrlen)) < 0) {
-        printf("[%d] Error while accepting the client.", *client);
+        printf("[%d] Error while accepting the client.\n", *client);
         return -1;
     }
 
@@ -58,7 +58,7 @@ int sendToClient(int client, char* message) {
 }
 
 char *receiveFromClient(int client) {
-    char *buffer[1024] = { 0 };
+    char buffer[1024] = { 0 };
     char *bufferText;
     int readValue;
 
@@ -66,9 +66,7 @@ char *receiveFromClient(int client) {
     if (readValue < 0) {
         printf("[%d] Error while receiving message.\n", readValue);
     }
-    printf("%s\n", buffer);
-
-    bufferText = bufferText;
+    bufferText = buffer;
 
     return bufferText;
 }

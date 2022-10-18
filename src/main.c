@@ -11,18 +11,17 @@ int commandComputer();
 
 int main() {
     int client;
-    char *option;
 
     server(&client);
 
     sendToClient(client, getMessage());
     
-    option = receiveFromClient(client);
+    char *option = receiveFromClient(client);
 
     int error = commandComputer(option);
     if (error < 0) {
-      printf("Error while commandind computer");
-      sendToClient(client, "Error while commanding computer");
+      printf("[%d] Error while commanding computer\n", error);
+      sendToClient(client, "Error while commanding computer\n");
       close(client);
       return -1;
     }
@@ -33,28 +32,29 @@ int main() {
 }
 
 char *getMessage() {
-  char* title = "===== MySecurity =====";
-  char* zero = "0.Shutdown Computer";
-  char* one = "1.Turn off MySecurity";
-  char* two = "2.Exit";
+  char* message = "===== MySecurity =====\n0.Shutdown Computer\n1.Turn off MySecurity\n2.Exit";
 
-  char message[1024];
   char *message_ptr = message;
 
-  snprintf(message, sizeof(message), "%s%s%s%s", title, zero, one, two);
-
-  return zero;
+  return message_ptr;
 }
 
-int commandComputer(int option) {
+int commandComputer(char *option) {
+  printf("\noption: %s\n", option);
+  if (option[0] == '1') {
+    return 0;
+  }
+  if (option[0] == '2') {
+    return 0;
+  }
 #ifdef __unix__
-  if (option == 0) {
+  if (option[0] == '0') {
     system("sudo shutdown -P now");
     return 0;
   }
 #endif
 #ifdef _WIN32
-  if (option == 0) {
+  if (option[0] == '0') {
     system("shutdown -s -c 'mySecurity'");
     return 0;
   }
