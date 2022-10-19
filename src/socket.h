@@ -1,5 +1,11 @@
-int server(int *client);
+// Set up socket
+int init_socket(int *client);
 
-int sendToClient(int client, char *message);
+// End up socket
+int close_socket();
 
-char *receiveFromClient(int client);
+// Send message to client
+int client_send(int client, char *message);
+
+// Get message from client
+char *client_receive(int client);
