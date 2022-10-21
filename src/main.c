@@ -32,7 +32,7 @@ int main()
             if (error < 0)
                 close(client);
 
-            // Get messagee sended from client
+            // Get message sended from client
             option = client_receive(client);
 
             // Handle user option
@@ -40,6 +40,7 @@ int main()
             if (error < 0)
                 connected = false;
         }
+        // Close socket server
         error = close_socket();
         if (error < 0)
             return -1;
