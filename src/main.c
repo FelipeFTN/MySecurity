@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "handler.h"
-#include "socket.h"
+#include "handler/handler.h"
+#include "socket/socket.h"
 
 int main()
 {
