@@ -5,7 +5,7 @@ MySecurity uses 3 layers of control to encrypt your computer data and also comma
 
 Basically it creates a secure API that can be interacted from your phone in order to execute commands on your computer.
 
-## MySecurity v2
+## MySecurity v2 (Beta)
 We're working on a next version of MySecurity, which will be a lighter version, easy to run, and compiled.
 
 It's currently working perfectly, but still in development.
