@@ -1,19 +1,16 @@
 {
   "name": "mysecurity",
-  "version": "1.0.0",
-  "description": "computer privacy safer",
-  "main": "main.js",
+  "version": "0.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FelipeFTN/MySecurity.git"
+  "dependencies": {
+    "vue": "^3.2.41"
   },
-  "author": "FelipeFTN",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FelipeFTN/MySecurity/issues"
-  },
-  "homepage": "https://github.com/FelipeFTN/MySecurity#readme"
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.2",
+    "vite": "^3.1.8"
+  }
 }

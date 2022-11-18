@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>MySecurity</title>
-		<link rel="stylesheet" href="./assets/styles.css" />
-		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-	</head>
-	<body>
-		<div id="app">
-			<h1>MySecurity</h1>
-			<br>
-			<div class="instance">
-				<span>{{ InstanceName }}</span><br>
-				<span>{{ InstanceIP }}</span><br>
-				<select id="instance-commands">
-					<option value="InstanceOptionsvalue[0]">{{ InstanceOptions[0] }}</option>
-					<option value="InstanceOptionsValue[1]">{{ InstanceOptions[1] }}</option>
-				</select>
-				<button v-on:click="command()">Apply</button>
-				<input type="text" placeholder="Instance Output" :value="InstanceOutput" readonly></input><br>
-			</div>
-		</div>
-
-		<script src="./main.js"></script>
-	</body>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
