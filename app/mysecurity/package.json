@@ -1,0 +1,19 @@
+{
+  "name": "mysecurity",
+  "version": "1.0.0",
+  "description": "computer privacy safer",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelipeFTN/MySecurity.git"
+  },
+  "author": "FelipeFTN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelipeFTN/MySecurity/issues"
+  },
+  "homepage": "https://github.com/FelipeFTN/MySecurity#readme"
+}

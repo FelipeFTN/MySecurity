@@ -8,7 +8,18 @@
 	</head>
 	<body>
 		<div id="app">
-			<h1>{{ mySecurity }}</h1>
+			<h1>MySecurity</h1>
+			<br>
+			<div class="instance">
+				<span>{{ InstanceName }}</span><br>
+				<span>{{ InstanceIP }}</span><br>
+				<select id="instance-commands">
+					<option value="shutdown">Shutdown</option>
+					<option value="disable">Disable Security</option>
+				</select>
+				<input type="button" value="Apply"></input><br>
+				<input type="text" placeholder="Instance Output" readonly></input><br>
+			</div>
 		</div>
 
 		<script src="./main.js"></script>

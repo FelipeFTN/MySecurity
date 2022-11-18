@@ -1,9 +1,10 @@
 const app = Vue.createApp({
 	data() {
 		return {
-			mySecurity: "MySecurity!",
-			image: "./assets/images/MySecurity.png"
-		}
+			InstanceName: "MyInstance",
+			InstanceIP: "127.0.0.1",
+			InstanceOutput: "Hello World"
+		};
 	}
 });
 
