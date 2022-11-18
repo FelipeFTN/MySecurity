@@ -14,17 +14,14 @@
 				<span>{{ InstanceName }}</span><br>
 				<span>{{ InstanceIP }}</span><br>
 				<select id="instance-commands">
-					<option value="shutdown">Shutdown</option>
-					<option value="disable">Disable Security</option>
+					<option value="InstanceOptionsvalue[0]">{{ InstanceOptions[0] }}</option>
+					<option value="InstanceOptionsValue[1]">{{ InstanceOptions[1] }}</option>
 				</select>
-				<input type="button" value="Apply"></input><br>
-				<input type="text" placeholder="Instance Output" readonly></input><br>
+				<button v-on:click="command()">Apply</button>
+				<input type="text" placeholder="Instance Output" :value="InstanceOutput" readonly></input><br>
 			</div>
 		</div>
 
 		<script src="./main.js"></script>
-		<script>
-			const mountedApp = app.mount('#app')
-		</script>
 	</body>
 </html>
