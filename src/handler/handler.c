@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <windows.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -10,6 +11,18 @@ char *get_commands()
     char *message_ptr = message;
 
     return message_ptr;
+}
+
+// Display a message on screen
+int display_message(char *message)
+{
+    char buffer[1024];
+    
+    // snprintf(buffer, 1024, message);
+    
+    MessageBox(0, buffer, message, 0);
+    
+    return 0;
 }
 
 // Get option and execute a command
