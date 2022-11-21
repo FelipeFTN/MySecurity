@@ -63,6 +63,7 @@ int init_socket(int *client)
 // End up socket
 int close_socket()
 {
+	printf("[+] Close socket");
     int error = shutdown(server_socket, SHUT_RDWR);
     if (error)
         return -1;
@@ -83,10 +84,12 @@ int client_send(int client, char *buffer)
 // Get a message from client
 int client_receive(int client, char *buffer)
 {
+	printf("client message: %s", buffer);
+
 	char new_buffer[1024] = { 0 };
     int readValue;
 
-    readValue = read(client, new_buffer, 1024);
+    readValue = recv(client, new_buffer, 1024);
     if (readValue < 0)
     {
         printf("[%d] Error while receiving message.\n", readValue);
@@ -94,6 +97,8 @@ int client_receive(int client, char *buffer)
     }
 	buffer = new_buffer;
 	printf("> %s\n", new_buffer);
+
+	printf("client message: %s", buffer);
 
     return 0;
 }

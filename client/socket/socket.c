@@ -67,7 +67,7 @@ int server_receive(int sock, char *buffer)
     char new_buffer[1024] = {0};
     int readValue;
 
-    readValue = read(sock, new_buffer, 1024);
+    readValue = recv(sock, new_buffer, 1024);
     if (readValue < 0)
     {
         printf("[%d] Error while receiving message.\n", readValue);
