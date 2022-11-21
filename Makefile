@@ -1,4 +1,6 @@
+## TODO: REBUILD MAKEFILE TO BUILD BOTH CLIENT AND SERVER
 
+```
 bin/mySecurity: src/main.o src/socket/socket.o src/handler/handler.o
 	mkdir bin
 	gcc src/main.o src/socket/socket.o src/handler/handler.o -o bin/mySecurity
@@ -15,3 +17,4 @@ handler.o: src/handler/handler.c src/handler/handler.h
 clean:
 	rm src/*.o src/handler/*.o src/socket/*.o
 	rm -rf bin/
+```

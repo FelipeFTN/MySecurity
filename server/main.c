@@ -12,6 +12,7 @@ int main()
 {
     bool mysecurity = true;
     bool connected;
+	char *handshake;
     char *option;
     int client;
     int error;
@@ -27,18 +28,30 @@ int main()
         // While user does not choose 'Exit'
         while (connected)
         {
+			// Receive client's first message
+			error = client_receive(client, handshake);
+            if (error < 0)
+                close(client);
+
             // Send options to message
             error = client_send(client, get_commands());
             if (error < 0)
                 close(client);
 
             // Get message sended from client
-            option = client_receive(client);
+            error = client_receive(client, option);
+            if (error < 0)
+                close(client);
 
             // Handle user option
             error = run_command(option, client, &mysecurity);
             if (error < 0)
-                connected = false;
+			{
+				error = client_send(client, "[!] Invalid option");
+				if (error < 0)
+					close(client);
+			}
+
         }
 
         // Close socket server

@@ -47,7 +47,6 @@ int get_instance_info(char* name, char* ip)
 // Get option and execute a command
 int run_command(char *option, int client, bool *mysecurity)
 {
-    printf("[+] Client: %s\n", option);
     if (option[0] == '1') { *mysecurity = false; return -1; }
     if (option[0] == '2') { close(client); return -1; }
 #ifdef __unix__

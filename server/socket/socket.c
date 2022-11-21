@@ -24,7 +24,7 @@ int init_socket(int *client)
     // Open socket
     if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-        printf("[x] Error while creating the socket.");
+        printf("[x] Error while creating the socket.\n");
         return -1;
     }
 
@@ -55,8 +55,7 @@ int init_socket(int *client)
         printf("[x] Error while accepting the client.\n");
         return -1;
     }
-
-    printf("[] Client Connected!\n");
+	printf("[+] Client Connected!\n");
 
     return 0;
 }
@@ -71,9 +70,9 @@ int close_socket()
 }
 
 // Send a message to client
-int client_send(int client, char *message)
+int client_send(int client, char *buffer)
 {
-    if (send(client, message, strlen(message), 0) < 0)
+    if (send(client, buffer, strlen(buffer), 0) < 0)
     {
         printf("[x] Error while sending message.\n");
         return -1;
@@ -82,18 +81,19 @@ int client_send(int client, char *message)
 }
 
 // Get a message from client
-char *client_receive(int client)
+int client_receive(int client, char *buffer)
 {
-    char buffer[1024] = {0};
-    char *bufferText;
+	char new_buffer[1024] = { 0 };
     int readValue;
 
-    readValue = read(client, buffer, 1024);
+    readValue = read(client, new_buffer, 1024);
     if (readValue < 0)
     {
         printf("[%d] Error while receiving message.\n", readValue);
+		return 1;
     }
-    bufferText = buffer;
+	buffer = new_buffer;
+	printf("> %s\n", new_buffer);
 
-    return bufferText;
+    return 0;
 }
