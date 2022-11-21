@@ -40,6 +40,7 @@ int main()
             if (error < 0)
                 connected = false;
         }
+
         // Close socket server
         error = close_socket();
         if (error < 0)
