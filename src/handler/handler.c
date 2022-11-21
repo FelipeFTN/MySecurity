@@ -1,11 +1,14 @@
+#include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <sys/types.h>
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
+#include <netdb.h>
 
 // Get command options
 char *get_commands()
@@ -30,13 +33,13 @@ int get_instance_info(char* name, char* ip)
 
 	// Find host information
 	host_entry = gethostbyname(host);
-	if (host_entry < 0)
-		return -1
+	if (host_entry == NULL)
+		return -1;
 
 	// Convert into IP string
 	ip = inet_ntoa(*((struct in_addr*) host_entry->h_addr_list[0]));
 
-	*name = host;
+	name = host;
 
 	return 0;
 }

@@ -3,3 +3,4 @@ bin/
 
 # Files
 *.o
+.DS_Store
