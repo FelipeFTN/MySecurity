@@ -9,9 +9,7 @@
 // Set up socket
 int init_socket(int *client, int *sock)
 {
-	int valread;
 	int port = 8080;
-	char buffer[1024] = { 0 };
 	struct sockaddr_in serv_addr;
 	if ((*sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
