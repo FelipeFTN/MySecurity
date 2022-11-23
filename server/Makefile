@@ -1,5 +1,6 @@
 
 bin/mySecurity: main.o socket/socket.o handler/handler.o
+	mkdir -p bin/
 	gcc main.o socket/socket.o handler/handler.o -o bin/mySecurity
 
 main.o: main.c
@@ -13,4 +14,4 @@ handler.o: handler/handler.c handler/handler.h
 
 clean:
 	rm *.o handler/*.o socket/*.o
-	rm -rf bin/*
+	rm -rf bin/

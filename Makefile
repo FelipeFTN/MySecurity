@@ -1,20 +1,38 @@
-## TODO: REBUILD MAKEFILE TO BUILD BOTH CLIENT AND SERVER
+## Compile client & server
 
-```
-bin/mySecurity: src/main.o src/socket/socket.o src/handler/handler.o
-	mkdir bin
-	gcc src/main.o src/socket/socket.o src/handler/handler.o -o bin/mySecurity
+all: bin/client bin/server
 
-main.o: src/main.c
-	gcc -c src/main.c -o src/main.o
+bin/client: client/main.o client/socket/socket.o client/handler/handler.o
+	mkdir -p bin/
+	gcc client/main.o client/socket/socket.o client/handler/handler.o -o bin/client
 
-socket.o: src/socket/socket.c src/socket/socket.h
-	gcc -c src/socket/socket.c -o src/socket/socket.o
+bin/server: server/main.o server/socket/socket.o server/handler/handler.o
+	mkdir -p bin/
+	gcc server/main.o server/socket/socket.o server/handler/handler.o -o bin/server
 
-handler.o: src/handler/handler.c src/handler/handler.h
-	gcc -c src/handler/handler.c -o src/handler/handler.o
+## CLIENT
+client/main.o: client/main.c
+	gcc -c client/main.c -o client/main.o
+
+client/socket/socket.o: client/socket/socket.c client/socket/socket.h
+	gcc -c client/socket/socket.c -o client/socket/socket.o
+
+client/handler/handler.o: client/handler/handler.c client/handler/handler.h
+	gcc -c client/handler/handler.c -o client/handler/handler.o
+
+## SERVER
+server/main.o: server/main.c
+	gcc -c server/main.c -o server/main.o
+
+server/socket/socket.o: server/socket/socket.c server/socket/socket.h
+	gcc -c server/socket/socket.c -o server/socket/socket.o
+
+server/handler/handler.o: server/handler/handler.c server/handler/handler.h
+	gcc -c server/handler/handler.c -o server/handler/handler.o
 
 clean:
-	rm src/*.o src/handler/*.o src/socket/*.o
+	rm client/*.o client/handler/*.o client/socket/*.o
+	rm server/*.o server/handler/*.o server/socket/*.o
+	rm -rf client/bin
+	rm -rf server/bin
 	rm -rf bin/
-```
