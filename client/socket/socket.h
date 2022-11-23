@@ -2,10 +2,10 @@
 int init_socket(int *client, int *sock);
 
 // Close socket connection
-int close_socket(int *client);
+int close_socket(int client);
 
 // Send message to server 
-int server_send(int sock, char *buffer);
+int send_socket(int sock, char *buffer);
 
 // Get a message from server
-int server_receive(int sock, char *buffer);
+int receive_socket(int sock, char *buffer);

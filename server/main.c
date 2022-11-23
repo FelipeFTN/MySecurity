@@ -12,15 +12,16 @@ int main()
 {
     bool mysecurity = true;
     bool connected;
-	char *handshake;
+	char handshake[64];
     char *option;
     int client;
+	int sock;
     int error;
 
     while (mysecurity)
     {
         // Start socket server at port 8080
-        error = init_socket(&client);
+        error = init_socket(&client, &sock);
         if (error < 0)
             return -1;
         connected = true;
@@ -28,34 +29,40 @@ int main()
         // While user does not choose 'Exit'
         while (connected)
         {
-			// Receive client's first message
-			error = client_receive(client, handshake);
+			// Receive client's handshake 
+			error = receive_socket(client, handshake);
             if (error < 0)
-                close(client);
+                close_socket(client, sock);
+			if (handshake != "MySecurity - HandShake")
+			{
+				printf("[x] Could not handshake - `%s`\n", handshake);
+				close_socket(client, sock);
+				return -1;
+			}
 
             // Send options to message
-            error = client_send(client, get_commands());
+            error = send_socket(client, get_commands());
             if (error < 0)
-                close(client);
+                close_socket(client, sock);
 
             // Get message sended from client
-            error = client_receive(client, option);
+            error = receive_socket(client, option);
             if (error < 0)
-                close(client);
+                close_socket(client, sock);
 
             // Handle user option
             error = run_command(option, client, &mysecurity);
             if (error < 0)
 			{
-				error = client_send(client, "[!] Invalid option");
+				error = send_socket(client, "[!] Invalid option");
 				if (error < 0)
-					close(client);
+					close_socket(client, sock);
 			}
 
         }
 
         // Close socket server
-        error = close_socket();
+        error = close_socket(client, sock);
         if (error < 0)
             return -1;
     }

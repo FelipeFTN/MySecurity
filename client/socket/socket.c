@@ -6,8 +6,6 @@
 #include <string.h>
 #include <stdio.h>
 
-int client_socket;
-
 // Set up socket
 int init_socket(int *client, int *sock)
 {
@@ -43,38 +41,34 @@ int init_socket(int *client, int *sock)
 }
 
 // End up socket
-int close_socket(int* client)
+int close_socket(int client)
 {
-	close(*client);
+	close(client);
 	return 0;
 }
 
-// Send a message to server
-int server_send(int sock, char *buffer)
+// Send message to server
+int send_socket(int sock, char *buffer)
 {
-	// client or sock
-	if (send(sock, buffer, strlen(buffer), 0) < 0)
-	{
-		printf("[x] Error while sending message.\n");
+	int error;
+
+	error = send(sock, buffer, strlen(buffer), 0);
+	if (error < 0)
 		return -1;
-	}
+
+	printf("> %s\n", buffer);
 	return 0;
 }
 
 // Get a message from server
-int server_receive(int sock, char *buffer)
+int receive_socket(int sock, char *buffer)
 {
-    char new_buffer[1024] = {0};
-    int readValue;
+	int error;
+	
+	error = read(sock, buffer, 1024);
+	if (error < 0)
+		return -1;
 
-    readValue = recv(sock, new_buffer, 1024);
-    if (readValue < 0)
-    {
-        printf("[%d] Error while receiving message.\n", readValue);
-		return 1;
-    }
-	buffer = new_buffer;
-	printf("> %s\n", buffer);
-
-    return 0;
+	printf("< %s\n", buffer);
+	return 0;
 }

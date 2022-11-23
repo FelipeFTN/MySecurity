@@ -16,18 +16,18 @@ int main() {
 	connected = true;
 	
 	// Send Handshake to server
-	error = server_send(sock, message);
+	error = send_socket(sock, message);
 	if (error < 0)
 		return -1;
 
 	// Receive from server
-	error = server_receive(sock, message);
+	error = receive_socket(sock, message);
 	if (error < 0)
 		return -1;
 
 	printf("< ");
 	scanf("%s", command);
-	error = server_send(sock, command);
+	error = send_socket(sock, command);
 	if (error < 0)
 		return -1;
 

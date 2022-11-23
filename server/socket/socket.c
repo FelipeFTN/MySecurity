@@ -5,10 +5,8 @@
 #include <string.h>
 #include <stdio.h>
 
-int server_socket;
-
 // Set up socket
-int init_socket(int *client)
+int init_socket(int *client, int *sock)
 {
     struct sockaddr_in address;
     const int port = 8080;
@@ -22,35 +20,35 @@ int init_socket(int *client)
     printf("MySecurity PORT: %d\n", port);
 
     // Open socket
-    if ((server_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    if ((*sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         printf("[x] Error while creating the socket.\n");
         return -1;
     }
 
     // Set address for reuse
-    if (setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &opt, (socklen_t)sizeof(opt)) < 0)
+    if (setsockopt(*sock, SOL_SOCKET, SO_REUSEADDR, &opt, (socklen_t)sizeof(opt)) < 0)
     {
         printf("[x] Error while setting address for reuse\n");
         return -1;
     }
 
     // Bind address and port to socket
-    if (bind(server_socket, (struct sockaddr *)&address, (socklen_t)addrlen) < 0)
+    if (bind(*sock, (struct sockaddr *)&address, (socklen_t)addrlen) < 0)
     {
         printf("[x] Error while binding the socket.\n");
         return -1;
     }
 
     // Listen to socket for connections
-    if (listen(server_socket, 3) < 0)
+    if (listen(*sock, 3) < 0)
     {
         printf("[x] Error while listening the socket.\n");
         return -1;
     }
 
     // Accept client connection
-    if ((*client = accept(server_socket, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
+    if ((*client = accept(*sock, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
     {
         printf("[x] Error while accepting the client.\n");
         return -1;
@@ -61,44 +59,40 @@ int init_socket(int *client)
 }
 
 // End up socket
-int close_socket()
+int close_socket(int client, int sock)
 {
-	printf("[+] Close socket");
-    int error = shutdown(server_socket, SHUT_RDWR);
+	printf("[+] Close socket\n");
+	// Closing the connected socket
+	close(client);
+	// Closing the listening socket
+    int error = shutdown(sock, SHUT_RDWR);
     if (error)
         return -1;
     return 0;
 }
 
-// Send a message to client
-int client_send(int client, char *buffer)
+// Send message to client
+int send_socket(int client, char *buffer)
 {
-    if (send(client, buffer, strlen(buffer), 0) < 0)
-    {
-        printf("[x] Error while sending message.\n");
-        return -1;
-    }
-    return 0;
+	int error;
+
+	error = send(client, buffer, strlen(buffer), 0);
+	if (error < 0)
+		return -1;
+
+	printf("> %s\n", buffer);
+	return 0;
 }
 
-// Get a message from client
-int client_receive(int client, char *buffer)
+// Get message from client
+int receive_socket(int client, char *buffer)
 {
-	printf("client message: %s", buffer);
+	int error;
 
-	char new_buffer[1024] = { 0 };
-    int readValue;
+	error = read(client, buffer, 1024);
+	if (error < 0)
+		return -1;
 
-    readValue = recv(client, new_buffer, 1024);
-    if (readValue < 0)
-    {
-        printf("[%d] Error while receiving message.\n", readValue);
-		return 1;
-    }
-	buffer = new_buffer;
-	printf("> %s\n", new_buffer);
-
-	printf("client message: %s", buffer);
-
-    return 0;
+	printf("< %s\n", buffer);
+	return 0;
 }
