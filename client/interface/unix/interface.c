@@ -2,18 +2,21 @@
 
 static int counter = 0;
 
+// Greet message
 void greet(GtkWidget* widget, gpointer data)
 {
     g_print("welcome to GTK\n");
     g_print("%s clicked %d times\n", (char*)data, ++counter);
 }
 
+// Destroy interface
 void destroy(GtkWidget* widget, gpointer data)
 {
     gtk_main_quit();
 }
 
-int main(int argc, char* argv[])
+// Create interface
+int interface(int argc, char* argv[])
 {
     GtkWidget* window;
     GtkWidget* button;
