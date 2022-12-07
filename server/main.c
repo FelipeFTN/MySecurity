@@ -58,7 +58,6 @@ int main()
 				if (error < 0)
 					close_socket(client, sock);
 			}
-
         }
 
         // Close socket server
