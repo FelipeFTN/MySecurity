@@ -4,7 +4,8 @@
 #include "socket/socket.h"
 
 int main() {
-	char *message = "MySecurity - HandShake";
+	char *handshake = "MySecurity - HandShake";
+	char message[256];
 	int client, error, sock = 0;
 	bool mysecurity, connected;
 	char *command;
@@ -16,7 +17,7 @@ int main() {
 	connected = true;
 	
 	// Send Handshake to server
-	error = send_socket(sock, message);
+	error = send_socket(sock, handshake);
 	if (error < 0)
 		return -1;
 

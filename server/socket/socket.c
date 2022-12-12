@@ -67,31 +67,41 @@ int close_socket(int client, int sock)
 	// Closing the listening socket
     int error = shutdown(sock, SHUT_RDWR);
     if (error)
+	{
+		printf("[x] Error while turning off the socket\n");
         return -1;
+	}
+
     return 0;
 }
 
-// Send message to client
+// Send message to client 
 int send_socket(int client, char *buffer)
 {
 	int error;
 
 	error = send(client, buffer, strlen(buffer), 0);
 	if (error < 0)
+	{
+		printf("[x] Error while sending to client\n");
 		return -1;
+	}
 
 	printf("> %s\n", buffer);
 	return 0;
 }
 
-// Get message from client
+// Get message from client 
 int receive_socket(int client, char *buffer)
 {
 	int error;
 
 	error = read(client, buffer, 1024);
 	if (error < 0)
+	{
+		printf("[x] Error while receiving from client\n");
 		return -1;
+	}
 
 	printf("< %s\n", buffer);
 	return 0;

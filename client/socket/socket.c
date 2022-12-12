@@ -52,7 +52,10 @@ int send_socket(int sock, char *buffer)
 
 	error = send(sock, buffer, strlen(buffer), 0);
 	if (error < 0)
+	{
+		printf("[x] Error while sending to server\n");
 		return -1;
+	}
 
 	printf("> %s\n", buffer);
 	return 0;
@@ -65,7 +68,10 @@ int receive_socket(int sock, char *buffer)
 	
 	error = read(sock, buffer, 1024);
 	if (error < 0)
+	{
+		printf("[x] Error while receiving from server\n");
 		return -1;
+	}
 
 	printf("< %s\n", buffer);
 	return 0;
