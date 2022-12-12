@@ -10,8 +10,8 @@
 
 int main()
 {
+    bool connected, handshaked;
     bool mysecurity = true;
-    bool connected;
 	char handshake[64];
     char *option;
     int client;
@@ -33,7 +33,9 @@ int main()
 			error = receive_socket(client, handshake);
             if (error < 0)
                 close_socket(client, sock);
-			if (handshake != "MySecurity - HandShake")
+
+			handshaked = strstr(handshake, "HandShake");
+			if (!handshaked)
 			{
 				printf("[x] Could not handshake - `%s`\n", handshake);
 				close_socket(client, sock);
