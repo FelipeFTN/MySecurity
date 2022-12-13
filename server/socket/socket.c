@@ -87,7 +87,6 @@ int send_socket(int client, char *buffer)
 		return -1;
 	}
 
-	printf("> %s\n", buffer);
 	return 0;
 }
 

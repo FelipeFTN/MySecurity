@@ -57,7 +57,6 @@ int send_socket(int sock, char *buffer)
 		return -1;
 	}
 
-	printf("> %s\n", buffer);
 	return 0;
 }
 

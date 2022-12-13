@@ -45,16 +45,21 @@ int get_instance_info(char* name, char* ip)
 }
 
 // Get option and execute a command
-int run_command(char *option, int client, bool *mysecurity)
+int run_command(char *option, bool *mysecurity, bool *connected)
 {
-	printf("[!] run command: %s", option);
-    if (option[0] == '1') { *mysecurity = false; return -1; }
-    if (option[0] == '2') { close(client); return -1; }
-#ifdef __unix__
-    if (option[0] == '0') { system("sudo shutdown -P now"); return 0; }
-#endif
-#ifdef _WIN32
-    if (option[0] == '0') { system("shutdown -s -c 'mySecurity'"); return 0; }
-#endif
-    return -1;
+	printf("[!] run command: %s\n", option);
+	if (option[0] == '0')
+	{
+		printf("shutting down computer");
+		system("sudo shutdown -P");
+		return 0;
+		
+	} else if (option[0] == '1')
+	{
+		*connected = false;
+		*mysecurity = false;
+		return 0;
+	}
+
+	return -1;
 }

@@ -11,9 +11,9 @@
 int main()
 {
     bool connected, handshaked;
+    char option[1024] = { 0 };
     bool mysecurity = true;
 	char handshake[64];
-    char *option;
     int client;
 	int sock;
     int error;
@@ -53,7 +53,7 @@ int main()
                 close_socket(client, sock);
 
             // Handle user option
-            error = run_command(option, client, &mysecurity);
+            error = run_command(option, &mysecurity, &connected);
             if (error < 0)
 			{
 				error = send_socket(client, "[!] Invalid option");
@@ -61,11 +61,6 @@ int main()
 					close_socket(client, sock);
 			}
         }
-
-        // Close socket server
-        error = close_socket(client, sock);
-        if (error < 0)
-            return -1;
     }
     return 0;
 }

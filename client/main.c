@@ -5,9 +5,9 @@
 
 int main() {
 	char *handshake = "MySecurity - HandShake";
-	char message[256];
+	char message[1024] = { 0 };
 	int client, error, sock = 0;
-	bool mysecurity, connected;
+	bool connected;
 	char *command;
 
 	// Start Client
@@ -21,16 +21,20 @@ int main() {
 	if (error < 0)
 		return -1;
 
-	// Receive from server
-	error = receive_socket(sock, message);
-	if (error < 0)
-		return -1;
+	while (connected)
+	{
+		// Receive from server
+		error = receive_socket(sock, message);
+		if (error < 0)
+			return -1;
 
-	printf("< ");
-	scanf("%s", command);
-	error = send_socket(sock, command);
-	if (error < 0)
-		return -1;
+		// Send to server
+		printf("< ");
+		scanf("%s", command);
+		error = send_socket(sock, command);
+		if (error < 0)
+			return -1;
+	}
 
 	return 0;
 }
