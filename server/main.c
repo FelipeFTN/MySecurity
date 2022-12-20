@@ -1,6 +1,10 @@
+#ifdef _WIN32
+#include <winsock2.h>
+#else
 #include <sys/socket.h>
-#include <stdbool.h>
 #include <unistd.h>
+#endif
+#include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -13,9 +17,9 @@ int main()
     bool connected, handshaked;
     char option[1024] = { 0 };
     bool mysecurity = true;
-	char handshake[64];
+    char handshake[64];
     int client;
-	int sock;
+    int sock;
     int error;
 
     while (mysecurity)
@@ -29,18 +33,18 @@ int main()
         // While user does not choose 'Exit'
         while (connected)
         {
-			// Receive client's handshake 
-			error = receive_socket(client, handshake);
+	    // Receive client's handshake 
+	    error = receive_socket(client, handshake);
             if (error < 0)
                 close_socket(client, sock);
 
-			handshaked = strstr(handshake, "HandShake");
-			if (!handshaked)
-			{
-				printf("[x] Could not handshake - `%s`\n", handshake);
-				close_socket(client, sock);
-				return -1;
-			}
+	    handshaked = strstr(handshake, "HandShake");
+	    if (!handshaked)
+	    {
+		printf("[x] Could not handshake - `%s`\n", handshake);
+		close_socket(client, sock);
+		return -1;
+	    }
 
             // Send options to message
             error = send_socket(client, get_commands());
@@ -55,11 +59,11 @@ int main()
             // Handle user option
             error = run_command(option, &mysecurity, &connected);
             if (error < 0)
-			{
-				error = send_socket(client, "[!] Invalid option");
-				if (error < 0)
-					close_socket(client, sock);
-			}
+	    {
+		error = send_socket(client, "[!] Invalid option");
+		if (error < 0)
+		close_socket(client, sock);
+	    }
         }
     }
     return 0;

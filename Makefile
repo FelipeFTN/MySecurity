@@ -1,6 +1,11 @@
 ## Compile client & server
+
 CC=gcc
 PROGRAMS=bin/server bin/client
+
+# Uncomment this line in case of linker error while building
+# CFLAGS=-fno-use-linker-plugin
+
 ifeq ($(OS),Windows_NT)
 	CFLAGS+= -l ws2_32
 endif

@@ -1,14 +1,18 @@
+#ifdef _WIN32
+#include <winsock2.h>
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <unistd.h>
+#include <netdb.h>
+#endif
+
 #include <sys/types.h>
 #include <stdbool.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
-#include <netdb.h>
 
 // Get command options
 char *get_commands()
@@ -20,6 +24,7 @@ char *get_commands()
 }
 
 // Get instance info
+/*
 int get_instance_info(char* name, char* ip)
 {
 	char host[256];
@@ -43,6 +48,7 @@ int get_instance_info(char* name, char* ip)
 
 	return 0;
 }
+*/
 
 // Get option and execute a command
 int run_command(char *option, bool *mysecurity, bool *connected)
