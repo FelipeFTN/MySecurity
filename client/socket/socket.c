@@ -1,14 +1,24 @@
+#ifdef _WIN32
+#include <winsock2.h>
+#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#endif
+
 #include <string.h>
 #include <stdio.h>
 
 // Set up socket
 int init_socket(int *client, int *sock)
 {
+#ifdef _WIN32
+	WSADATA wsa;
+	WSAStartup(MAKEWORD(2, 0), &wsa);
+#endif
+
 	int port = 8080;
 	struct sockaddr_in serv_addr;
 	if ((*sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
@@ -41,7 +51,14 @@ int init_socket(int *client, int *sock)
 // End up socket
 int close_socket(int client)
 {
+	printf("[+] Close socket");
+	//Closing the connected socket
+#ifdef _WIN32
+	closesocket(client);
+	WSACleanup();
+#else
 	close(client);
+#endif
 	return 0;
 }
 
