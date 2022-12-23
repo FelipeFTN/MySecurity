@@ -15,7 +15,12 @@ int init_socket(int *client, int *sock)
 {
 #ifdef _WIN32
 	WSADATA wsa;
-	WSAStartup(MAKEWORD(2, 0), &wsa);
+
+	if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
+	{
+		printf("Failed. Error Code : %d",WSAGetLastError());
+		return -1;
+	}
 #endif
 
     const int port = 8080;
@@ -36,15 +41,24 @@ int init_socket(int *client, int *sock)
         return -1;
     }
 
+#ifdef _WIN32
     // Set address for reuse
-    if (setsockopt(*sock, SOL_SOCKET, SO_REUSEADDR, &opt, (socklen_t)sizeof(opt)) < 0)
+    if (setsockopt(*sock, SOL_SOCKET, SO_REUSEADDR, (char *) &opt, sizeof(opt)) < 0)
     {
         printf("[x] Error while setting address for reuse\n");
         return -1;
     }
+#else
+    // Set address for reuse
+    if (setsockopt(*sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0)
+    {
+        printf("[x] Error while setting address for reuse\n");
+        return -1;
+    }
+#endif
 
     // Bind address and port to socket
-    if (bind(*sock, (struct sockaddr *)&address, (socklen_t)addrlen) < 0)
+    if (bind(*sock, (struct sockaddr *)&address, addrlen) < 0)
     {
         printf("[x] Error while binding the socket.\n");
         return -1;
@@ -57,12 +71,22 @@ int init_socket(int *client, int *sock)
         return -1;
     }
 
+#ifdef _WIN32
+    // Accept client connection
+    if ((*client = accept(*sock, (struct sockaddr *)&address, &addrlen)) < 0)
+    {
+        printf("[x] Error while accepting the client.\n");
+        return -1;
+    }
+#else
     // Accept client connection
     if ((*client = accept(*sock, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
     {
         printf("[x] Error while accepting the client.\n");
         return -1;
     }
+#endif
+
 	printf("[+] Client Connected!\n");
 
     return 0;
@@ -103,12 +127,21 @@ int receive_socket(int client, char *buffer)
 {
 	int error;
 
+#ifdef _WIN32
+	error = recv(client, buffer, 1024, 0);
+	if (error < 0)
+	{
+		printf("[x] Error while receiving from client\n");
+		return -1;
+	}	
+#else
 	error = read(client, buffer, 1024);
 	if (error < 0)
 	{
 		printf("[x] Error while receiving from client\n");
 		return -1;
 	}
+#endif
 
 	printf("< %s\n", buffer);
 	return 0;

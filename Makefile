@@ -1,13 +1,18 @@
 ## Compile client & server
 
 CC=gcc
+
+# Uncomment this lines to use compile to windows on an unix based system
+# CC=i686-w64-mingw32-gcc
+# CFLAGS+= -lws2_32
+
 PROGRAMS=$(SERVER_BINARY) $(CLIENT_BINARY)
 
 # Uncomment this line in case of linker error while building
-# CFLAGS=-fno-use-linker-plugin
+# CFLAGS+= -fno-use-linker-plugin
 
 ifeq ($(OS),Windows_NT)
-	CFLAGS+= -l ws2_32
+	CFLAGS+= -lws2_32
 endif
 
 ## SERVER
@@ -24,11 +29,11 @@ all: $(PROGRAMS)
 
 $(SERVER_BINARY): $(SERVER_OBJECTS)
 	mkdir -p bin/
-	$(CC) $^ -o $@
+	$(CC) $^ -o $@ $(CFLAGS)
 
 $(CLIENT_BINARY): $(CLIENT_OBJECTS)
 	mkdir -p bin/
-	$(CC) $^ -o $@
+	$(CC) $^ -o $@ $(CFLAGS)
 
 %.o:%.c
 	$(CC) -c $^ -o $@ $(CFLAGS)

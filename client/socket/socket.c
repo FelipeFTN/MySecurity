@@ -1,5 +1,6 @@
 #ifdef _WIN32
 #include <winsock2.h>
+#include <Ws2tcpip.h>
 #else
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -16,7 +17,12 @@ int init_socket(int *client, int *sock)
 {
 #ifdef _WIN32
 	WSADATA wsa;
-	WSAStartup(MAKEWORD(2, 0), &wsa);
+
+	if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
+	{
+		printf("Failed. Error Code : %d",WSAGetLastError());
+		return -1;
+	}
 #endif
 
 	int port = 8080;
@@ -30,12 +36,22 @@ int init_socket(int *client, int *sock)
 	serv_addr.sin_family = AF_INET;
 	serv_addr.sin_port = htons(port);
 
+#ifdef _WIN32
+	// Convert IP address from text to binary
+	if (InetPtonW(AF_INET, L"127.0.0.1", &serv_addr.sin_addr) <= 0)
+	{
+		printf("[x] Error while converting IP.\n");
+		return -1;
+	}
+
+#else
 	// Convert IP address from text to binary
 	if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0)
 	{
 		printf("[x] Error while converting IP.\n");
 		return -1;
 	}
+#endif
 
 	// Connect client to server
 	if((*client = connect(*sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr))) < 0)
@@ -82,12 +98,21 @@ int receive_socket(int sock, char *buffer)
 {
 	int error;
 	
+#ifdef _WIN32
+	error = recv(sock, buffer, 1024, 0);
+	if (error < 0)
+	{
+		printf("[x] Error while receiving from server\n");
+		return -1;
+	}	
+#else
 	error = read(sock, buffer, 1024);
 	if (error < 0)
 	{
 		printf("[x] Error while receiving from server\n");
 		return -1;
 	}
+#endif
 
 	printf("< %s\n", buffer);
 	return 0;
