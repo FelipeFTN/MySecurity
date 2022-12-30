@@ -15,9 +15,9 @@
 int main()
 {
     bool connected, handshaked;
-    char option[1024] = { 0 };
+    char option[8] = { 0 };
     bool mysecurity = true;
-    char handshake[64];
+    char handshake[16];
     int client;
     int sock;
     int error;
@@ -33,37 +33,41 @@ int main()
         // While user does not choose 'Exit'
         while (connected)
         {
-	    // Receive client's handshake 
-	    error = receive_socket(client, handshake);
-            if (error < 0)
-                close_socket(client, sock);
 
-	    handshaked = strstr(handshake, "HandShake");
-	    if (!handshaked)
-	    {
-		printf("[x] Could not handshake - `%s`\n", handshake);
-		close_socket(client, sock);
-		return -1;
-	    }
+			// Receive client's handshake 
+			error = receive_socket(client, handshake);
+				if (error < 0)
+					close_socket(client, sock);
 
-            // Send options to message
-            error = send_socket(client, get_commands());
-            if (error < 0)
-                close_socket(client, sock);
+			handshaked = strstr(handshake, "Handshake");
 
-            // Get message sended from client
-            error = receive_socket(client, option);
-            if (error < 0)
-                close_socket(client, sock);
+			if (handshaked)
+			{
+				printf("[+] Handshaked!\n");
 
-            // Handle user option
-            error = run_command(option, &mysecurity, &connected);
-            if (error < 0)
-	    {
-		error = send_socket(client, "[!] Invalid option");
-		if (error < 0)
-		close_socket(client, sock);
-	    }
+				// Send options to message
+				error = send_socket(client, get_commands());
+				if (error < 0)
+					close_socket(client, sock);
+
+				// Get message sended from client
+				error = receive_socket(client, option);
+				if (error < 0)
+					close_socket(client, sock);
+
+				// Handle user option
+				error = run_command(option, &mysecurity, &connected);
+				if (error < 0)
+				{
+					error = send_socket(client, "[!] Invalid option");
+					if (error < 0)
+						close_socket(client, sock);
+				}
+			} else {
+				printf("[x] Could not handshake - `%s`\n", handshake);
+				close_socket(client, sock);
+				return -1;
+			}
         }
     }
     return 0;

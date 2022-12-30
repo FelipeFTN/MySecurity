@@ -17,7 +17,7 @@
 // Get command options
 char *get_commands()
 {
-    char *message = "===== MySecurity =====\n\n0.Shutdown Computer\n1.Turn off MySecurity\n2.Exit\n";
+    char *message = "===== MySecurity =====\n\n[0] Shutdown Computer\n[1] Turn off MySecurity\n[2] Exit\n";
     char *message_ptr = message;
 
     return message_ptr;

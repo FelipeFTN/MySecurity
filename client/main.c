@@ -4,11 +4,11 @@
 #include "socket/socket.h"
 
 int main() {
-	char *handshake = "MySecurity - HandShake";
-	char message[1024] = { 0 };
+	char *handshake = "Handshake";
 	int client, error, sock = 0;
+	char message[256] = { 0 };
+	char command[16] = { 0 };
 	bool connected;
-	char *command;
 
 	// Start Client
 	error = init_socket(&client, &sock);
@@ -29,8 +29,8 @@ int main() {
 			return -1;
 
 		// Send to server
-		printf("< ");
-		scanf("%s", command);
+		printf("> ");
+		scanf("%[^\n]", command);
 		error = send_socket(sock, command);
 		if (error < 0)
 			return -1;

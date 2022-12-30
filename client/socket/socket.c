@@ -12,6 +12,8 @@
 #include <string.h>
 #include <stdio.h>
 
+// TODO: Fix this mess.
+
 // Set up socket
 int init_socket(int *client, int *sock)
 {
