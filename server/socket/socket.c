@@ -102,6 +102,7 @@ int close_socket(int client, int sock)
 	WSACleanup();
 #else
 	close(client);
+	shutdown(client, SHUT_RDWR);
 #endif
 
     return 0;

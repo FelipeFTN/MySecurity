@@ -57,13 +57,22 @@ int run_command(char *option, bool *mysecurity, bool *connected)
 	if (option[0] == '0')
 	{
 		printf("shutting down computer");
+#ifdef _WIN32
+		system("shutdown -s");
+#else
 		system("sudo shutdown -P");
+#endif
 		return 0;
 		
 	} else if (option[0] == '1')
 	{
 		*connected = false;
 		*mysecurity = false;
+		return 0;
+	} else if (option[0] == '2')
+	{
+		*connected = false;
+		*mysecurity = true;
 		return 0;
 	}
 
