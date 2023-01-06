@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: "Build & Analysis"
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
     - name: Makefile
       run: make
 
-    - name: Perform CodeQL Analysis
+    - name: Code Analysis
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:${{matrix.language}}"
