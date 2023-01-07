@@ -1,5 +1,5 @@
 # MySecurity v2
-MySecurity is a simple application that allows you to control your machine remotelly from your smartphone, smartwatch and even from another computer, by connecting with your machine and executing commands from anywhere.<br>
+MySecurity is a simple program that allows you to access your computer from another device. It uses Socket to connect you with your computer, which were separated into client and server.<br>
 There was an old version of MySecurity, which you can [check here](https://github.com/FelipeFTN/MySecurity/tree/v1), but it was discontinued due to hard complexity and maintenance of the code.<br>
 We're working on MySecurity v2, which is a lighter version, easy to run, faster and compiled.<br>
 MySecurity v2 is cross-platform, so you can run it from any operational system.
