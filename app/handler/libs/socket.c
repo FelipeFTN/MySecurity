@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include <string.h>
 
-// TODO: Fix this mess.
-
 // Set up socket
 int init_socket(int *client, int *sock) {
 #ifdef _WIN32
