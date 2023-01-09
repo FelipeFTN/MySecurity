@@ -14,6 +14,7 @@ int api(char *message) {
     error = save_api_data(api_data);
     if (error < 0)
       return -1;
+
     return 0;
   }
 

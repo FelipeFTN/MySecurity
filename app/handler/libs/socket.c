@@ -13,7 +13,7 @@
 #include <string.h>
 
 // Set up socket
-int init_socket(int *client, int *sock) {
+int init_socket(char* host, int port, int *client, int *sock) {
 #ifdef _WIN32
   WSADATA wsa;
 
@@ -23,7 +23,6 @@ int init_socket(int *client, int *sock) {
   }
 #endif
 
-  int port = 8080;
   struct sockaddr_in serv_addr;
   if ((*sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
     printf("[x] Error while creating the socket.\n");
@@ -35,14 +34,14 @@ int init_socket(int *client, int *sock) {
 
 #ifdef _WIN32
   // Convert IP address from text to binary
-  if (InetPtonW(AF_INET, L"127.0.0.1", &serv_addr.sin_addr) <= 0) {
+  if (InetPtonW(AF_INET, host, &serv_addr.sin_addr) <= 0) {
     printf("[x] Error while converting IP.\n");
     return -1;
   }
 
 #else
   // Convert IP address from text to binary
-  if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+  if (inet_pton(AF_INET, host, &serv_addr.sin_addr) <= 0) {
     printf("[x] Error while converting IP.\n");
     return -1;
   }
@@ -96,7 +95,7 @@ int receive_socket(int sock, char *buffer) {
     return -1;
   }
 #else
-  error = read(sock, buffer, 1024);
+  error = recv(sock, buffer, 1024, 0);
   if (error < 0) {
     printf("[x] Error while receiving from server\n");
     return -1;

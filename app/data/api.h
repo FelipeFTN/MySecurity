@@ -1,5 +1,5 @@
-#ifndef API_H
-#define API_H
+#ifndef _API_H_
+#define _API_H_
 
 // API struct
 struct api_data_struct {

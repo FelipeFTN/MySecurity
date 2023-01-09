@@ -1,5 +1,5 @@
 // Set up socket
-int init_socket(int *client, int *sock);
+int init_socket(char *host, int port, int *client, int *sock);
 
 // Close socket connection
 int close_socket(int client);
