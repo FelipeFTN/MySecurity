@@ -5,7 +5,7 @@ MySecurity is a simple program that allows you to access your computer from anot
 - _app_ controls all back-end computer functions (build in **C**)
 - _api_ controls all the APIs and front-end functions (build in **Go**)
 
-MySecurity is using two mainly programming languages to work, **Go** using some frameworks such as [Gin](https://github.com/gin-gonic/gin) and [GOSF](http://gosf.io/) and **C**
+MySecurity is using two mainly programming languages to work, **Go** using some frameworks like [Gin](https://github.com/gin-gonic/gin) and a self-build Socket, and **C**
  using _Domain Driven Design_ and _Factory_ Design Patterns.
 
 ## Contributing

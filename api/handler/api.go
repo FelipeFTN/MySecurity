@@ -1,8 +1,8 @@
-package main
+package handler
 
 import "github.com/gin-gonic/gin"
 
-func main() {
+func Server() {
 	server := gin.Default()
 
 	server.GET("/test", func(ctx *gin.Context) {
@@ -11,7 +11,6 @@ func main() {
 		})
 	})
 
-	// TODO: Socket connection
-
 	server.Run(":8080")
+
 }
