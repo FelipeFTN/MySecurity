@@ -12,8 +12,11 @@
 #include <stdio.h>
 #include <string.h>
 
+int sock;
+int client;
+
 // Set up socket
-int init_socket(char* host, int port, int *client, int *sock) {
+int init_socket(char* host, int port) {
 #ifdef _WIN32
   WSADATA wsa;
 
@@ -24,7 +27,7 @@ int init_socket(char* host, int port, int *client, int *sock) {
 #endif
 
   struct sockaddr_in serv_addr;
-  if ((*sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
     printf("[x] Error while creating the socket.\n");
     return -1;
   }
@@ -48,7 +51,7 @@ int init_socket(char* host, int port, int *client, int *sock) {
 #endif
 
   // Connect client to server
-  if ((*client = connect(*sock, (struct sockaddr *)&serv_addr,
+  if ((client = connect(sock, (struct sockaddr *)&serv_addr,
                          sizeof(serv_addr))) < 0) {
     printf("[x] Error while connecting to server.\n");
     return -1;
@@ -59,7 +62,7 @@ int init_socket(char* host, int port, int *client, int *sock) {
 }
 
 // End up socket
-int close_socket(int client) {
+int close_socket() {
   printf("[+] Close socket");
   // Closing the connected socket
 #ifdef _WIN32
@@ -72,7 +75,7 @@ int close_socket(int client) {
 }
 
 // Send message to server
-int send_socket(int sock, char *buffer) {
+int send_socket(char *buffer) {
   int error;
 
   error = send(sock, buffer, strlen(buffer), 0);
@@ -85,7 +88,7 @@ int send_socket(int sock, char *buffer) {
 }
 
 // Get a message from server
-int receive_socket(int sock, char *buffer) {
+int receive_socket(char *buffer) {
   int error;
 
 #ifdef _WIN32

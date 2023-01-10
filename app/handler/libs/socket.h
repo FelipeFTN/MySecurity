@@ -1,11 +1,11 @@
 // Set up socket
-int init_socket(char *host, int port, int *client, int *sock);
+int init_socket(char *host, int port);
 
 // Close socket connection
-int close_socket(int client);
+int close_socket();
 
 // Send message to server 
-int send_socket(int sock, char *buffer);
+int send_socket(char *buffer);
 
 // Get a message from server
-int receive_socket(int sock, char *buffer);
+int receive_socket(char *buffer);

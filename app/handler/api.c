@@ -4,18 +4,18 @@
 
 // API handler
 int handler_api(char *host, int port) {
-  int error, client, sock;
-  char message[64];
+  char message[64] = "handshake";
+  int error;
 
-  error = init_socket(host, port, &client, &sock);
+  error = init_socket(host, port);
   if (error < 0)
     return -1;
 
-  error = send_socket(sock, "handshake");
+  error = send_socket(message);
   if (error < 0)
     return -1;
 
-  error = close_socket(client);
+  error = close_socket();
   if (error < 0)
     return -1;
 
