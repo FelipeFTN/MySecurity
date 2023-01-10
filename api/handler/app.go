@@ -9,11 +9,17 @@ import (
 func App() {
 	api.InitSocket("127.0.0.1", 8079)
 
-	message, err := api.ReceiveFromSocket()
+	_, err := api.SendToSocket("handshake")
 	if err != nil {
-		fmt.Println("error while receiving from socket")
+		fmt.Println("error while sending to socket")
 		return
 	}
 
-	fmt.Printf("< %s\n", message)
+	// message, err := api.ReceiveFromSocket()
+	// if err != nil {
+	// 	fmt.Println("error while receiving from socket")
+	// 	return
+	// }
+
+	// fmt.Printf("< %s\n", message)
 }
