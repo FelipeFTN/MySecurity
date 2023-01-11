@@ -7,12 +7,12 @@
 #include "libs/socket.h"
 
 // API handler
-int handler_api(char *host, int port) {
+int handler_api(char *HOST, int PORT) {
   char socket_message[64] = {0};
   int error, option;
 
   // Init socket
-  error = init_socket(host, port);
+  error = init_socket(HOST, PORT);
   if (error < 0)
     return -1;
 

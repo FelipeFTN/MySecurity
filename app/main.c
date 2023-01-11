@@ -3,11 +3,11 @@
 #include "handler/api.h"
 
 int main() {
-  char *ip = "127.0.0.1";
-  int port = 8079;
+  char *HOST = "127.0.0.1";
+  int PORT = 8079;
 
   // API Connection
-  handler_api(ip, port);
+  handler_api(HOST, PORT);
 
   return 0;
 }

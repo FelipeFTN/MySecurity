@@ -16,7 +16,7 @@ int sock;
 int client;
 
 // Set up socket
-int init_socket(char* host, int port) {
+int init_socket(char* HOST, int PORT) {
 #ifdef _WIN32
   WSADATA wsa;
 
@@ -33,18 +33,18 @@ int init_socket(char* host, int port) {
   }
 
   serv_addr.sin_family = AF_INET;
-  serv_addr.sin_port = htons(port);
+  serv_addr.sin_port = htons(PORT);
 
 #ifdef _WIN32
   // Convert IP address from text to binary
-  if (InetPtonW(AF_INET, host, &serv_addr.sin_addr) <= 0) {
+  if (InetPtonW(AF_INET, HOST, &serv_addr.sin_addr) <= 0) {
     printf("[x] Error while converting IP.\n");
     return -1;
   }
 
 #else
   // Convert IP address from text to binary
-  if (inet_pton(AF_INET, host, &serv_addr.sin_addr) <= 0) {
+  if (inet_pton(AF_INET, HOST, &serv_addr.sin_addr) <= 0) {
     printf("[x] Error while converting IP.\n");
     return -1;
   }
