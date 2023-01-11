@@ -10,9 +10,6 @@ int sock = 0;
 int client_fd;
 
 int init_socket(char *host, int port) {
-  char *hello = "Hello from client";
-  char buffer[1024] = {0};
-
   struct sockaddr_in serv_addr;
 
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -28,7 +25,8 @@ int init_socket(char *host, int port) {
     return -1;
   }
 
-  if ((client_fd = connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr))) < 0) {
+  if ((client_fd = connect(sock, (struct sockaddr *)&serv_addr,
+                           sizeof(serv_addr))) < 0) {
     printf("\nConnection Failed \n");
     return -1;
   }
@@ -49,11 +47,11 @@ int send_socket(char *buffer) {
 int receive_socket(char *buffer) {
   int error;
 
-  error = read(sock, buffer, 2048);
+  error = read(sock, buffer, 1024);
   if (error < 0)
     return -1;
 
-  printf("< %s <\n", buffer);
+  printf("< %s", buffer);
 
   return 0;
 }
