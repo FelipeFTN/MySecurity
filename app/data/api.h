@@ -3,7 +3,7 @@
 
 // API struct
 struct api_data_struct {
-  bool handshake;
+  bool connected;
 };
 
 // API save data

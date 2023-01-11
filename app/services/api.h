@@ -1,2 +1,2 @@
 // API message handler
-int api(char *message);
+int handler_api_request(char *message);
