@@ -8,8 +8,8 @@ import (
 
 var c net.Conn
 
-func InitSocket(host string, port int16) (net.Conn, error) {
-	l, err := net.Listen("tcp", fmt.Sprintf("%s:%d", host, port))
+func InitSocket(HOST string, PORT int16) (net.Conn, error) {
+	l, err := net.Listen("tcp", fmt.Sprintf("%s:%d", HOST, PORT))
 	if err != nil {
 		return c, err
 	}
@@ -30,7 +30,6 @@ func SendToSocket(buffer string) (net.Conn, error) {
 }
 
 func ReceiveFromSocket() (string, error) {
-	// Print - string(buffer[:len(buffer)-1])
 	buffer, err := bufio.NewReader(c).ReadBytes('\n')
 	if err != nil {
 		c.Close()
