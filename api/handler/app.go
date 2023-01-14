@@ -16,20 +16,6 @@ func InitApp(HOST string, PORT int16) error {
 		return err
 	}
 
-	// First handshake
-	_, err = app.SendToSocket("handshake")
-	if err != nil {
-		fmt.Println("error while sending handshake to socket")
-		return err
-	}
-
-	// Receive confirmation handshake
-	_, err = app.ReceiveFromSocket()
-	if err != nil {
-		fmt.Println("error while receiving handshake from socket")
-		return err
-	}
-
 	return nil
 }
 
