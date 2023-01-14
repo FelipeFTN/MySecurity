@@ -3,16 +3,19 @@
 #include <string.h>
 
 #include "../services/api.h"
-#include "api.h"
 #include "libs/socket.h"
 
 // API handler
-int handler_api(char *HOST, int PORT) {
+int api_handler(char *HOST, int PORT) {
   char socket_message[64] = {0};
   int error, option;
 
   // Init socket
   error = init_socket(HOST, PORT);
+  if (error < 0)
+    return -1;
+
+  error = api_handshake();
   if (error < 0)
     return -1;
 
@@ -22,21 +25,18 @@ int handler_api(char *HOST, int PORT) {
     if (error < 0)
       return -1;
 
-    // Receive from socket
-    error = send_socket(socket_message);
-    if (error < 0)
-      return -1;
-
-    // Remove '\n' from message
-    socket_message[strlen(socket_message) - 1] = 0;
-
     // API message handler
-    option = handler_api_request(socket_message);
-    if (option < 0) {
-      printf("[%d] handler finished.\n", option);
-      break;
-    }
+    if (!strcmp(socket_message, "")) {
+      option = api_response_handler(socket_message);
+      if (option <= 0) {
+        printf("[%d] Handler finished\n", option);
+        break;
+      }
 
+      error = send_socket(socket_message);
+      if (error < 0)
+        return -1;
+    }
     // Clear memory buffer
     memset(socket_message, 0, sizeof socket_message);
   }

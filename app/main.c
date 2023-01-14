@@ -7,7 +7,7 @@ int main() {
   int PORT = 8079;
 
   // API Connection
-  handler_api(HOST, PORT);
+  api_handler(HOST, PORT);
 
   return 0;
 }

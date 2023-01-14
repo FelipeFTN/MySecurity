@@ -78,7 +78,7 @@ int close_socket() {
 int send_socket(char *buffer) {
   int error;
 
-  error = send(sock, buffer, strlen(buffer), 0);
+  error = send(sock, strcat(buffer, "\n"), strlen(buffer) + 1, 0);
   if (error < 0) {
     printf("[x] Error while sending to server\n");
     return -1;

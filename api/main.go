@@ -9,6 +9,8 @@ func main() {
 	// Initialize application
 	handler.InitApp(IP, PORT)
 
+	handler.SendToApp("I will live for you my selfless love")
+
 	// Initialize web server at port 80
-	handler.Server(":80")
+	// handler.Server(":80")
 }

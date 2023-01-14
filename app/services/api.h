@@ -1,2 +1,5 @@
 // API message handler
-int handler_api_request(char *message);
+int api_response_handler(char *message);
+
+// API handshake
+int api_handshake();
