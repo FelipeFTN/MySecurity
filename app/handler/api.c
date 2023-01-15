@@ -8,7 +8,6 @@
 // API handler
 int api_handler(char *HOST, int PORT) {
   char socket_message[64] = {0};
-  char parsed_message[64] = {0};
   int error, option;
 
   // Init socket
@@ -21,19 +20,9 @@ int api_handler(char *HOST, int PORT) {
     error = receive_socket(socket_message);
     if (error < 0)
       return -1;
-
-    // API message formatter
-    error = parse_message(socket_message, parsed_message);
-    if (error < 0) {
-      printf("[x] Parsing error");
-    }
     
     // API message handler
-    option = api_response_handler(parsed_message);
-    if (option < 0) {
-      printf("[+] Handler finished\n");
-      break;
-    }
+    option = api_response_handler(socket_message);
 
     error = send_socket(socket_message);
     if (error < 0)
@@ -41,6 +30,11 @@ int api_handler(char *HOST, int PORT) {
 
     // Clear memory buffer
     memset(socket_message, 0, sizeof socket_message);
+
+    if (option < 0) {
+      printf("[+] Handler finished\n");
+      break;
+    }
   }
 
   // Close socket

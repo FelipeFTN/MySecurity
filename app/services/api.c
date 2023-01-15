@@ -5,17 +5,37 @@
 #include "../data/api.h"
 #include "../libs/socket.h"
 
+int parse_message(char *socket_message, char *parsed_message);
+
 // API message handler
 int api_response_handler(char *socket_message) {
+  char parsed_message[64] = {0};
   int error;
 
-  printf("[+] Handler %s\n", socket_message);
+  // API message formatter
+  error = parse_message(socket_message, parsed_message);
+  if (error < 0) {
+    printf("[x] Parsing error");
+  }
 
-  if (strstr(socket_message, "0")) {
+  printf("[+] Handler %s\n", parsed_message);
+
+  if (strstr(parsed_message, "quit")) {
     // Quit application
-    socket_message = "quit";
+    socket_message = "quit\n";
     return -1;
   }
+  return 0;
+}
+
+int parse_message(char *socket_message, char* parsed_message) {
+  // Copy variable bytes
+  strcpy(parsed_message, socket_message);
+
+  // Remove '\n' byte from message
+  if (parsed_message[strlen(parsed_message) - 1] == '\n')
+    parsed_message[strlen(parsed_message) - 1] = 0;
+
   return 0;
 }
 
@@ -37,16 +57,6 @@ int api_handshake() {
     return -1;
 
   printf("[+] handshaked\n");
-
-  return 0;
-}
-
-int parse_message(char *socket_message, char* parsed_message) {
-  // Remove '\n' byte from message
-  if (socket_message[strlen(socket_message) - 1] == '\n')
-    socket_message[strlen(socket_message) - 1] = 0;
-
-  strcpy(parsed_message, socket_message);
 
   return 0;
 }
