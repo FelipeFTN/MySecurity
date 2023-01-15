@@ -12,25 +12,11 @@ func main() {
 	var err error
 
 	// Initialize application
-	err = handler.InitApp(IP, PORT)
+	err = handler.App(IP, PORT)
 	if err != nil {
-		fmt.Println("error")
+		fmt.Println(err)
 		return
 	}
-
-	err = handler.SendToApp("Selfless")
-	if err != nil {
-		fmt.Println("error")
-		return
-	}
-
-	message, err := handler.ReceiveFromApp()
-	if err != nil {
-		fmt.Println("error")
-		return
-	}
-
-	fmt.Println(message)
 
 	// Initialize web server at port 80
 	// handler.Server(":80")
