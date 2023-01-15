@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "../services/api.h"
-#include "libs/socket.h"
+#include "../libs/socket.h"
 
 // API handler
 int api_handler(char *HOST, int PORT) {

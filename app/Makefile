@@ -2,7 +2,7 @@
 CC=gcc
 
 BINARY=bin/MySecurity
-OBJECTS=main.o handler/api.o handler/libs/socket.o services/api.o data/api.o
+OBJECTS=main.o handler/api.o libs/socket.o services/api.o data/api.o
 
 $(BINARY): $(OBJECTS)
 	mkdir -p bin/
