@@ -16,6 +16,9 @@ int api_handler(char *HOST, int PORT) {
     return -1;
 
   while (true) {
+    // Debugging log
+    printf("[+] Listening...\n");
+
     // Receive from socket
     error = receive_socket(socket_message);
     if (error < 0)
@@ -24,6 +27,7 @@ int api_handler(char *HOST, int PORT) {
     // API message handler
     option = api_response_handler(socket_message);
 
+    // Send to socket
     error = send_socket(socket_message);
     if (error < 0)
       return -1;

@@ -25,6 +25,11 @@ func App(HOST string, PORT int16) error {
 		return err
 	}
 
+	err = app.SendToSocket("quit")
+	if err != nil {
+		return err
+	}
+
 	fmt.Println(message)
 
 	return nil
