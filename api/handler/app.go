@@ -1,36 +1,17 @@
 package handler
 
 import (
-	"fmt"
-
-	"github.com/FelipeFTN/MySecurity/services/app"
+	// #include "../../app/app.h"
+	"C"
 )
+import "errors"
 
-func App(HOST string, PORT int16) error {
-	var err error
+func App() error {
 
-	// Init socket
-	_, err = app.InitSocket(HOST, PORT)
-	if err != nil {
-		return err
+	err := C.app(C.CString("Hello World!"))
+	if err != 0 {
+		return errors.New("App")
 	}
-
-	err = app.SendToSocket("handshake")
-	if err != nil {
-		return err
-	}
-
-	message, err := app.ReceiveFromSocket()
-	if err != nil {
-		return err
-	}
-
-	err = app.SendToSocket("quit")
-	if err != nil {
-		return err
-	}
-
-	fmt.Println(message)
 
 	return nil
 }
