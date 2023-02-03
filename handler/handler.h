@@ -7,4 +7,4 @@ char *get_commands();
 int get_instance_info(char *name, char* ip);
 
 // Get option and execute a command
-int run_command(char *option, bool *mysecurity, bool *connected);
+int run_command(char *option, bool *connected);

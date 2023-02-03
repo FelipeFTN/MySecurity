@@ -48,7 +48,7 @@ int get_instance_info(char *name, char *ip) {
 }
 
 // Get option and execute a command
-int run_command(char *option, bool *mysecurity, bool *connected) {
+int run_command(char *option, bool *connected) {
   printf("[!] run command: %s\n", option);
   if (option[0] == '0') {
     printf("shutting down computer");
@@ -61,11 +61,9 @@ int run_command(char *option, bool *mysecurity, bool *connected) {
 
   } else if (option[0] == '1') {
     *connected = false;
-    *mysecurity = false;
     return 0;
   } else if (option[0] == '2') {
     *connected = false;
-    *mysecurity = true;
     return 0;
   }
 
