@@ -10,40 +10,49 @@
 #include <string.h>
 
 #include "handler/handler.h"
-#include "socket/socket.h"
+#include "libs/socket/socket.h"
 
 int main() {
   bool connected;
-  char option[8] = {0};
+  char buffer[32] = {0};
   int client;
   int sock;
   int error;
 
   // Start socket server at port 8080
-  error = init_socket(&client, &sock);
+  error = init_socket(&client, &sock, 8080);
   if (error < 0)
     return -1;
   connected = true;
 
   // While user does not choose 'Exit'
-  while (connected) {
+  do {
     // Send options to message
     error = send_socket(client, get_commands());
-    if (error < 0)
+    if (error < 0) {
       close_socket(client, sock);
+      connected = false;
+    }
 
     // Get message sended from client
-    error = receive_socket(client, option);
-    if (error < 0)
+    error = receive_socket(client, buffer);
+    if (error < 0) {
       close_socket(client, sock);
+      connected = false;
+    }
 
     // Handle user option
-    error = run_command(option, &connected);
+    error = run_command(buffer, &connected);
     if (error < 0) {
       error = send_socket(client, "[!] Invalid option");
-      if (error < 0)
+      if (error < 0) {
         close_socket(client, sock);
+        connected = false;
+      }
     }
-  }
+
+    // Clear variable value from memory
+    memset(buffer, 0, sizeof(buffer));
+  } while (connected);
   return 0;
 }

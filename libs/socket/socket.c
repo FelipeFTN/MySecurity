@@ -11,7 +11,7 @@
 #include <string.h>
 
 // Set up socket
-int init_socket(int *client, int *sock) {
+int init_socket(int *client, int *sock, int port) {
 #ifdef _WIN32
   WSADATA wsa;
 
@@ -21,7 +21,6 @@ int init_socket(int *client, int *sock) {
   }
 #endif
 
-  const int port = 8080;
   struct sockaddr_in address;
   address.sin_addr.s_addr = INADDR_ANY;
   address.sin_port = htons(port);

@@ -1,17 +1,34 @@
+## Compile MySecurity
 
-bin/mySecurity: main.o socket/socket.o handler/handler.o
+CC=gcc
+
+# Uncomment this lines to use compile to windows on an unix based system
+# CC=i686-w64-mingw32-gcc
+# CFLAGS+= -lws2_32
+
+PROGRAMS=$(BINARY)
+
+# Uncomment this line in case of linker error while building
+# CFLAGS+= -fno-use-linker-plugin
+
+ifeq ($(OS),Windows_NT)
+	CFLAGS+= -lws2_32
+endif
+
+BINARY=bin/mySecurity
+CFILES=main.c libs/socket/socket.c handler/handler.c
+OBJECTS=main.o libs/socket/socket.o handler/handler.o
+
+all: $(PROGRAMS)
+
+$(BINARY): $(OBJECTS)
 	mkdir -p bin/
-	gcc main.o socket/socket.o handler/handler.o -o bin/mySecurity
+	$(CC) $^ -o $@ $(CFLAGS)
 
-main.o: main.c
-	gcc -c main.c -o main.o
+%.o:%.c
+	$(CC) -c $^ -o $@ $(CFLAGS)
 
-socket.o: socket/socket.c socket/socket.h
-	gcc -c socket/socket.c -o socket/socket.o
-
-handler.o: handler/handler.c handler/handler.h
-	gcc -c handler/handler.c -o handler/handler.o
-
+## Clear all binaries & objects 
 clean:
-	rm *.o handler/*.o socket/*.o
 	rm -rf bin/
+	rm $(OBJECTS)
