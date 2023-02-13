@@ -42,13 +42,17 @@ int main() {
     }
 
     // Handle user option
-    error = run_command(buffer, &connected);
+    error = run_command(buffer);
     if (error < 0) {
       error = send_socket(client, "[!] Invalid option");
       if (error < 0) {
         close_socket(client, sock);
         connected = false;
       }
+    }
+    if (error == 1) {
+      close_socket(client, sock);
+      connected = false;
     }
 
     // Clear variable value from memory
