@@ -2,7 +2,7 @@ name: "🔮 MySecurity Pipeline"
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "feature/cmake-pipeline" ]
   pull_request:
     branches: [ "master" ]
 
