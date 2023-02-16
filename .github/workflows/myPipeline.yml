@@ -38,6 +38,7 @@ jobs:
       uses: threeal/cmake-action@v1.1.0
       with:
         c-compiler: gcc
+        c-flags: -lws2_32
 
     - name: ✨ Code Analysis
       uses: github/codeql-action/analyze@v2
