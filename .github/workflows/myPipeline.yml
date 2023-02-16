@@ -30,9 +30,12 @@ jobs:
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-
+    
     - name: 🪄 Build 
       run: make
+      
+    - name: 💎 CMake
+      uses: threeal/cmake-action@v1.1.0
 
     - name: ✨ Code Analysis
       uses: github/codeql-action/analyze@v2
