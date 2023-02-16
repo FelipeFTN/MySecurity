@@ -16,7 +16,7 @@ jobs:
       security-events: write
 
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
         language: [ 'cpp' ]
@@ -31,11 +31,13 @@ jobs:
       with:
         languages: ${{ matrix.language }}
     
-    - name: 🪄 Build 
-      run: make
+#    - name: 🪄 Build 
+#      run: make
       
     - name: 💎 CMake
       uses: threeal/cmake-action@v1.1.0
+      with:
+        c-compiler: gcc
 
     - name: ✨ Code Analysis
       uses: github/codeql-action/analyze@v2
