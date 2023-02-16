@@ -1,6 +1,8 @@
 # Directories
-bin/*
+**/cmake/
+**/CMakeFiles/
 
 # Files
 *.o
 .DS_Store
+MySecurity
