@@ -5,7 +5,7 @@
 </div>
 
 #
-**MySecurity is a simple application that allows to to command your computer from another device** It's pretty much like a remote control in which you can infer commands direcly to the machine.<br>
+**MySecurity is a simple application that allows you to command your computer from another device** It's pretty much like a remote control in which you can infer commands direcly to the machine.<br>
 **MySecurity** works throught Socket connections that will allow you access your computer just by connecting at the `port 8080` using a `socket client`.
 
 ## Installation
@@ -28,10 +28,10 @@ Download MySecurity from **master**.
   $ git clone https://github.com/FelipeFTN/MySecurity.git
   
   // WGet (latest release)
-  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.0.tar.gz
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.1.tar.gz
   
   // Curl (latest release)
-  $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.0.tar.gz > MySecurity.tar.gz
+  $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.1.tar.gz > MySecurity.tar.gz
 ```
 Extract the compressed file (_zip_ or _tar.gz_).
 
@@ -54,7 +54,7 @@ Otherwise, if you are a hard user you can compile by running:
 This process will generate a binary _MySecurity_ **or** _MySecurity.exe_ file, now you just need to run it.
 
 #### Make:
-If you want something REALLY easy, just run the Makefile by running:
+If you want something REALLY easy, then just run the **Makefile**:
 ```bash
   $ make
 ```
@@ -70,7 +70,7 @@ Once the client connects to MySecurity, it will receive a message with all the a
 [1] Shutdown Computer
 [2] Reboot Computer
 [0] Exit
->
+> | 1 | 2 | 0 |
 ```
 When a option is selected and sent, MySecurity will execute the command on the computer.<br>No matter what operating system you are using, the command will be executed with no problems, just make sure your firewall or system defender does not affect MySecurity.
 
