@@ -1,13 +1,87 @@
-# MySecurity v2
-MySecurity is a simple program that allows you to access your computer from another device. It uses Socket to connect you with your computer, which were separated into client and server.<br>
-There was an old version of MySecurity, which you can [check here](https://github.com/FelipeFTN/MySecurity/tree/v1), but it was discontinued due to hard complexity and maintenance of the code.<br>
-We're working on MySecurity v2, which is a lighter version, easy to run, faster and compiled.<br>
-MySecurity v2 is cross-platform, so you can run it from any operational system.
+<div align="center">
 
-## How it works?
-All the magic is handled by simple TCP connections between two applications(client & server).<br>
-We are going to add new authentication features and security logics very soon, and a possibility to control multiple machines throught MySecurity.
+![MySecurity](https://user-images.githubusercontent.com/80127749/219816170-f819f35c-6ae2-4592-b51c-1903dd07fc46.png)
 
-## Compiling
-You can compile your mySecurity source code using **make**. MySecurity compiling settings is all set up into _Makefile_, which is responsible by checking any change in source files and compiling it into a executable file that will be saved in */bin*.<br>
-If you want to build your MySecurity source code, just run: ```make``` into your terminal at MySecurity's root folder and the magic will be done.
+</div>
+
+#
+**MySecurity is a simple application that allows you to command your computer from another device** It's pretty much like a remote control in which you can infer commands direcly to the machine.<br>
+**MySecurity** works throught Socket connections that will allow you access your computer just by connecting at the `port 8080` using a `socket client`.
+
+## Installation
+
+### Precompiled (recommended)
+
+You can easily just install and use MySecurity in your computer.<br>Go to [Releases](https://github.com/FelipeFTN/MySecurity/releases) and download one of the binaries available in the _Assets_ section. It is **plug & play**, just make sure your firewall doesn't block the TCP connection at the port 8080. 
+
+<div align="center" style="border: 1px solid white;">
+
+![Screenshot from 2023-02-17 19-58-06](https://user-images.githubusercontent.com/80127749/219817048-036f5e81-00a7-4ec5-b1e8-a2c41ddb1218.png)
+
+</div>
+
+### Build (compiling from source)
+Download MySecurity from **master**.
+
+```bash
+  // Git clone (master branch)
+  $ git clone https://github.com/FelipeFTN/MySecurity.git
+  
+  // WGet (latest release)
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.1.tar.gz
+  
+  // Curl (latest release)
+  $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.1.tar.gz > MySecurity.tar.gz
+```
+Extract the compressed file (_zip_ or _tar.gz_).
+
+In order to build your own application from source, you will need either **CMake** or **Make** to execute the _Makefile_.
+You will also need [GCC](https://gcc.gnu.org/) installed in your system (if you are in Microsoft Windows, we recommend using [MingW](https://www.mingw-w64.org/)).
+
+#### CMake:
+If you want something easy, execute the file _install.sh_, it should handle everything for you.<br>
+Otherwise, if you are a hard user you can compile by running:
+```bash
+  # Generate the building files
+  $ cmake -B cmake/
+
+  # Go to "cmake" directory
+  $ cd cmake/
+
+  # Compile MySecurity
+  $ make
+```
+This process will generate a binary _MySecurity_ **or** _MySecurity.exe_ file, now you just need to run it.
+
+#### Make:
+If you want something REALLY easy, then just run the **Makefile**:
+```bash
+  $ make
+```
+This will compile all the files for you automatically and will generate a binary _MySecurity_ **or** _MySecurity.exe_ file, now you just need to run it.
+
+
+    
+## Usage/Examples
+After running MySecurity from the computer you want to control, run the executable _MySecurity_ file. It will automatically open a port on your computer **(port 8080)** that will be allowed to receive socket connections from any device on the same network.
+Once the client connects to MySecurity, it will receive a message with all the available options:
+```bash
+===== MySecurity =====
+[1] Shutdown Computer
+[2] Reboot Computer
+[0] Exit
+> | 1 | 2 | 0 |
+```
+When a option is selected and sent, MySecurity will execute the command on the computer.<br>No matter what operating system you are using, the command will be executed with no problems, just make sure your firewall or system defender does not affect MySecurity.
+
+
+## Contributing
+
+
+If you want to contribute to improve MySecurity, please read [CONTRIBUTING.md](https://github.com/FelipeFTN/MySecurity/blob/master/CONTRIBUTING.md).
+
+> And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
+> - Star the project
+> - Tweet about it
+> - Refer this project in your project's readme
+> - Mention the project at local meetups and tell your friends/colleagues
