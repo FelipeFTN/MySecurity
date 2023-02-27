@@ -25,24 +25,24 @@ char *get_commands() {
 
 // Get option and execute a command
 int run_command(char *option) {
-#ifdef _WIN32 // Windows based operating system 
+#ifdef _WIN32 // Windows based operating system
   switch (atoi(option)) {
   case 0:
     return 1;
     break;
 
   case 1:
-    system("shutdown -s now");
+    system("shutdown -s -t 0");
     break;
 
   case 2:
-    system("shutdown -r");
+    system("shutdown -r -t 0");
     break;
 
   default:
     return -1;
   }
-#else // Unix based operating system 
+#else // Unix based operating system
   switch (atoi(option)) {
   case 0:
     return 1;
