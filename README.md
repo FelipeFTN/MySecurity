@@ -28,10 +28,10 @@ Download MySecurity from **master**.
   $ git clone https://github.com/FelipeFTN/MySecurity.git
   
   // WGet (latest release)
-  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.1.tar.gz
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.2.tar.gz
   
   // Curl (latest release)
-  $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.1.tar.gz > MySecurity.tar.gz
+  $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.2.tar.gz > MySecurity.tar.gz
 ```
 Extract the compressed file (_zip_ or _tar.gz_).
 
