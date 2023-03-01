@@ -28,10 +28,16 @@ Download MySecurity from **master**.
   $ git clone https://github.com/FelipeFTN/MySecurity.git
   
   // WGet (latest release)
-  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.2.tar.gz
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/{tag version}.tar.gz
   
   // Curl (latest release)
-  $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.2.tar.gz > MySecurity.tar.gz
+  $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/{tag version}.tar.gz > MySecurity.tar.gz
+```
+If you wanna use Curl, or WGet, please substitute the `{tag version}` for the latest version from the releases, or any tag you prefer, e.g.:<br>
+```bash
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.3.tar.gz
+  // or
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.3.zip
 ```
 Extract the compressed file (_zip_ or _tar.gz_).
 
@@ -58,7 +64,12 @@ If you want something REALLY easy, then just run the **Makefile**:
 ```bash
   $ make
 ```
-This will compile all the files for you automatically and will generate a binary _MySecurity_ **or** _MySecurity.exe_ file, now you just need to run it.
+This will compile all the files for you automatically and will generate a binary _MySecurity_ **or** _MySecurity.exe_ file at the _bin_ directory, now you just need to run it.<br>
+For this method to work, you will need **make** command installed into your system, if we are using Microsoft Windows, we highly recommend you to install it with [Chocolatey](https://chocolatey.org/install):<br>
+```bash
+  $ choco install make
+```
+In case you are may having trouble with make on Windows, take a look at this [article](https://www.technewstoday.com/install-and-use-make-in-windows/).
 
 
     
@@ -69,8 +80,9 @@ Once the client connects to MySecurity, it will receive a message with all the a
 ===== MySecurity =====
 [1] Shutdown Computer
 [2] Reboot Computer
+[3] Log out
 [0] Exit
-> | 1 | 2 | 0 |
+> | 1 | 2 | 3 | 0 |
 ```
 When a option is selected and sent, MySecurity will execute the command on the computer.<br>No matter what operating system you are using, the command will be executed with no problems, just make sure your firewall or system defender does not affect MySecurity.
 
