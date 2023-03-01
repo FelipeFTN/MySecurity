@@ -16,8 +16,8 @@
 
 // Get command options
 char *get_commands() {
-  char *message = "===== MySecurity =====\n\n[1] Shutdown Computer\n[2] Reboot "
-                  "Computer\n[0] Exit";
+  char *message = "===== MySecurity =====\n[1] Shutdown Computer\n[2] Reboot "
+                  "Computer\n[3] Log out\n[0] Exit";
   char *message_ptr = message;
 
   return message_ptr;
@@ -39,6 +39,10 @@ int run_command(char *option) {
     system("shutdown -r -t 0");
     break;
 
+  case 3:
+    system("shutdown -L");
+    break;
+
   default:
     return -1;
   }
@@ -54,6 +58,10 @@ int run_command(char *option) {
 
   case 2:
     system("sudo reboot");
+    break;
+
+  case 3:
+    system("gnome-session-save --force-logout"); // Gnome
     break;
 
   default:
