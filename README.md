@@ -8,6 +8,20 @@
 **MySecurity is a simple application that allows you to command your computer from another device** It's pretty much like a remote control in which you can infer commands direcly to the machine.<br>
 **MySecurity** works throught Socket connections that will allow you access your computer just by connecting at the `port 8080` using a `socket client`.
 
+    
+## Usage/Examples
+After running MySecurity from the computer you want to control, run the executable _MySecurity_ file. It will automatically open a port on your computer **(port 8080)** that will be allowed to receive socket connections from any device on the same network.
+Once the client connects to MySecurity, it will receive a message with all the available options:
+```bash
+===== MySecurity =====
+[1] Shutdown Computer
+[2] Reboot Computer
+[3] Log out
+[0] Exit
+> | 1 | 2 | 3 | 0 |
+```
+When a option is selected and sent, MySecurity will execute the command on the computer.<br>No matter what operating system you are using, the command will be executed with no problems, just make sure your firewall or system defender does not affect MySecurity.
+
 ## Installation
 
 ### Precompiled (recommended)
@@ -24,20 +38,22 @@ You can easily just install and use MySecurity in your computer.<br>Go to [Relea
 Download MySecurity from **master**.
 
 ```bash
-  // Git clone (master branch)
+  # Git clone (master branch)
   $ git clone https://github.com/FelipeFTN/MySecurity.git
   
-  // WGet (latest release)
+  # WGet (latest release)
   $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/{tag version}.tar.gz
   
-  // Curl (latest release)
+  # Curl (latest release)
   $ curl -L https://github.com/FelipeFTN/MySecurity/archive/refs/tags/{tag version}.tar.gz > MySecurity.tar.gz
 ```
 If you wanna use Curl, or WGet, please substitute the `{tag version}` for the latest version from the releases, or any tag you prefer, e.g.:<br>
 ```bash
-  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.3.tar.gz
-  // or
-  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.3.3.zip
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.x.x.tar.gz
+
+  # OR
+
+  $ wget https://github.com/FelipeFTN/MySecurity/archive/refs/tags/v0.x.x.zip
 ```
 Extract the compressed file (_zip_ or _tar.gz_).
 
@@ -71,24 +87,31 @@ For this method to work, you will need **make** command installed into your syst
 ```
 In case you are may having trouble with make on Windows, take a look at this [article](https://www.technewstoday.com/install-and-use-make-in-windows/).
 
-
-    
-## Usage/Examples
-After running MySecurity from the computer you want to control, run the executable _MySecurity_ file. It will automatically open a port on your computer **(port 8080)** that will be allowed to receive socket connections from any device on the same network.
-Once the client connects to MySecurity, it will receive a message with all the available options:
+#### Compiling to Windows from Unix
+To compile a `MySecurity.exe` file from Unix based operating systems, like Linux or Mac.<br>
+First, you will need to install [mingw-w64](https://www.mingw-w64.org/downloads/):
 ```bash
-===== MySecurity =====
-[1] Shutdown Computer
-[2] Reboot Computer
-[3] Log out
-[0] Exit
-> | 1 | 2 | 3 | 0 |
+  # Arch Linux & Manjaro
+  $ sudo pacman -Sy mingw-w64-gcc
+
+  # MacOS
+  $ brew install mingw-w64
+
+  # Debian based
+  $ sudo apt install mingw-w64
+
+  # Fedora, CentOS & RedHat based
+  $ sudo dnf install mingw-w64
 ```
-When a option is selected and sent, MySecurity will execute the command on the computer.<br>No matter what operating system you are using, the command will be executed with no problems, just make sure your firewall or system defender does not affect MySecurity.
+Now, just uncomment these two lines from `Makefile`:
+```bash
+  CC=i686-w64-mingw32-gcc
+  CFLAGS+= -lws2_32
+```
+Finally, simply run `make clean && make` to build the source code.
 
 
 ## Contributing
-
 
 If you want to contribute to improve MySecurity, please read [CONTRIBUTING.md](https://github.com/FelipeFTN/MySecurity/blob/master/CONTRIBUTING.md).
 
