@@ -3,12 +3,15 @@
 CC=gcc
 
 # Uncomment this lines to use compile to windows on an unix based system
+# You will need 'mingw-w64' to be installed in your machine.
+#
 # CC=i686-w64-mingw32-gcc
 # CFLAGS+= -lws2_32
 
 PROGRAMS=$(BINARY)
 
 # Uncomment this line in case of linker error while building
+#
 # CFLAGS+= -fno-use-linker-plugin
 
 ifeq ($(OS),Windows_NT)
