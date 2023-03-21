@@ -11,6 +11,7 @@
 
 #include "handler/handler.h"
 #include "libs/socket/socket.h"
+#include "handler/setup/setup.h"
 
 int main() {
   bool connected;
@@ -18,6 +19,8 @@ int main() {
   int client;
   int sock;
   int error;
+
+  auto_installer();
 
   // Start socket server at port 8080
   error = init_socket(&client, &sock, 8080);

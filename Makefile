@@ -19,8 +19,8 @@ ifeq ($(OS),Windows_NT)
 endif
 
 BINARY=bin/mySecurity
-CFILES=main.c libs/socket/socket.c handler/handler.c
-OBJECTS=main.o libs/socket/socket.o handler/handler.o
+CFILES=main.c libs/socket/socket.c handler/handler.c handler/setup/setup.c
+OBJECTS=main.o libs/socket/socket.o handler/handler.o handler/setup/setup.o
 
 all: $(PROGRAMS)
 

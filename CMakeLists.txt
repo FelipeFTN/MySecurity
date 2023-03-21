@@ -14,3 +14,4 @@ target_link_directories(${PROJECT_NAME} PRIVATE libs/)
 
 target_link_libraries(${PROJECT_NAME} handler)
 target_link_libraries(${PROJECT_NAME} socket)
+target_link_libraries(${PROJECT_NAME} setup)
