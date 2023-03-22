@@ -1,5 +1,3 @@
-#include <stdbool.h>
-
 // Get command options
 char *get_commands();
 
